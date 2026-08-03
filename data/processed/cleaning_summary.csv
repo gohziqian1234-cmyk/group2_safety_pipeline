@@ -1,0 +1,13 @@
+file,worker,work_state,rows_before,rows_after,rows_removed,status,error
+(die2) HJ motion_data.csv,hong_jean,fall_like,3000,3000,0,accepted,
+(near miss) HJ motion_data.csv,hong_jean,near_miss,3000,3000,0,accepted,
+motion_data (hj).csv,hong_jean,normal_work,2993,2993,0,accepted,
+KT_Fall_cleaned.csv,kwanteng,fall_like,1703,1703,0,accepted,
+KT_NearMissed_cleaned.csv,kwanteng,near_miss,1567,1567,0,accepted,
+KT_Normal.csv,kwanteng,normal_work,5251,5251,0,accepted,
+(die) pieere.csv,pierre,fall_like,3001,3001,0,accepted,
+(near miss) P.csv,pierre,near_miss,3000,3000,0,accepted,
+(normal) P motion_data.csv,pierre,normal_work,3005,3005,0,accepted,
+ziqian_die_data.csv,ziqian,fall_like,2897,2897,0,accepted,
+ziqian_near_miss_ die.csv,ziqian,near_miss,2896,2896,0,accepted,
+ziqian_normal_work_data.csv,ziqian,normal_work,2908,2908,0,accepted,
