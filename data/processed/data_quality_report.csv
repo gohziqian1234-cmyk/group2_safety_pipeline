@@ -1,0 +1,13 @@
+source_file,worker,recording_type,rows,duration_seconds,effective_rate_hz,large_gap_count,large_gap_percent,timing_jitter_found,missing_value_count,longest_identical_run_rows,max_acceleration_g,max_gyroscope_dps,quality,warning_reason
+(die2) HJ motion_data.csv,hong_jean,fall_like,3000,120.04,24.98,122,4.07,True,0,8,6.377,1153.85,PASS,
+(near miss) HJ motion_data.csv,hong_jean,near_miss,3000,119.99,24.99,306,10.2,True,0,14,4.615,1774.139,PASS,
+motion_data (hj).csv,hong_jean,normal_work,2993,119.7,24.99,321,10.73,True,0,2,3.408,1343.63,PASS,
+KT_Fall_cleaned.csv,kwanteng,fall_like,1703,66.53,25.58,149,8.75,True,0,1,3.28,1258.655,PASS,
+KT_NearMissed_cleaned.csv,kwanteng,near_miss,1567,60.21,26.01,106,6.77,True,0,1,4.471,1159.684,PASS,
+KT_Normal.csv,kwanteng,normal_work,5251,119.19,44.05,155,2.95,True,0,4,1.919,482.611,WARNING,effective rate far from 25 Hz
+(die) pieere.csv,pierre,fall_like,3001,120.06,24.99,109,3.63,True,0,13,5.871,995.569,PASS,
+(near miss) P.csv,pierre,near_miss,3000,120.03,24.99,71,2.37,True,0,2,4.831,584.049,PASS,
+(normal) P motion_data.csv,pierre,normal_work,3005,120.22,24.99,318,10.59,True,0,2,4.03,1012.887,PASS,
+ziqian_die_data.csv,ziqian,fall_like,2897,120.02,24.13,291,10.05,True,0,1,2.704,554.703,PASS,
+ziqian_near_miss_ die.csv,ziqian,near_miss,2896,120.05,24.12,342,11.81,True,0,11,6.199,1113.929,PASS,
+ziqian_normal_work_data.csv,ziqian,normal_work,2908,120.05,24.22,354,12.18,True,0,9,4.34,594.708,PASS,
