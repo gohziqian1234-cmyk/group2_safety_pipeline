@@ -183,7 +183,7 @@ def main():
     cleaned_files = []
     summaries = []
 
-    print("GROUP 2 DATA CLEANING")
+    print("GROUP 5 DATA CLEANING")
     print("Files found:", len(files))
 
     for file in files:

@@ -156,7 +156,7 @@ def main():
     report_rows = []
 
     print("=" * 60)
-    print("GROUP 2 DATA QUALITY CHECK")
+    print("GROUP 5 DATA QUALITY CHECK")
     print("=" * 60)
 
     groups = data.groupby(

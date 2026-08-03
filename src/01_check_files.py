@@ -297,7 +297,7 @@ def check_csv(csv_file: Path) -> dict:
 
 def main() -> None:
     print("=" * 70)
-    print("GROUP 2 AUTOMATIC SENSOR DATA CHECK")
+    print("GROUP 5 AUTOMATIC SENSOR DATA CHECK")
     print("=" * 70)
 
     # Automatically discover all CSV files.
