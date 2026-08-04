@@ -1,0 +1,9 @@
+worker,source_file,recording_type_from_file,candidate_1_seconds,candidate_2_seconds,candidate_3_seconds,suggested_event_type,suggested_event_time_seconds,event_start_seconds,event_end_seconds,post_event_end_seconds,selected_candidate_rank,final_event_type,confirmed,notes
+hong_jean,(die2) HJ motion_data.csv,fall_like,84.16,10.36,15.04,fall_event,84.16,82.66,85.66,92.16,,,NO,"Allowed final_event_type: near_miss, fall_recovery, fall_inactive, none_found"
+hong_jean,(near miss) HJ motion_data.csv,near_miss,53.17,1.57,45.49,near_miss,53.17,51.67,54.67,61.17,,,NO,"Allowed final_event_type: near_miss, fall_recovery, fall_inactive, none_found"
+kwanteng,KT_Fall_cleaned.csv,fall_like,16.17,25.69,6.53,fall_event,16.17,14.67,17.67,24.17,,,NO,"Allowed final_event_type: near_miss, fall_recovery, fall_inactive, none_found"
+kwanteng,KT_NearMissed_cleaned.csv,near_miss,16.53,4.17,36.73,near_miss,16.53,15.03,18.03,24.53,,,NO,"Allowed final_event_type: near_miss, fall_recovery, fall_inactive, none_found"
+pierre,(die) pieere.csv,fall_like,0.19,8.83,31.83,fall_event,0.19,0.03,1.69,8.19,,,NO,"Allowed final_event_type: near_miss, fall_recovery, fall_inactive, none_found"
+pierre,(near miss) P.csv,near_miss,9.12,18.96,66.36,near_miss,9.12,7.62,10.62,17.12,,,NO,"Allowed final_event_type: near_miss, fall_recovery, fall_inactive, none_found"
+ziqian,ziqian_die_data.csv,fall_like,64.05,33.57,88.09,fall_event,64.05,62.55,65.55,72.05,,,NO,"Allowed final_event_type: near_miss, fall_recovery, fall_inactive, none_found"
+ziqian,ziqian_near_miss_ die.csv,near_miss,11.74,58.46,32.42,near_miss,11.74,10.24,13.24,19.74,,,NO,"Allowed final_event_type: near_miss, fall_recovery, fall_inactive, none_found"

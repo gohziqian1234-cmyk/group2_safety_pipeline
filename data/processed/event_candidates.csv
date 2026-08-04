@@ -1,0 +1,25 @@
+worker,recording_type,source_file,candidate_rank,candidate_time_seconds,candidate_source,peak_prominence,fallback_used,acceleration_g,gyroscope_dps,jerk_raw_g_per_second,jerk_light_g_per_second,acceleration_z,gyroscope_z,jerk_z,impact_score,balance_loss_score,ranking_score
+hong_jean,fall_like,(die2) HJ motion_data.csv,1,84.16,impact,28.8135,False,5.8584,345.0242,1.5942,1.2295,27.6829,3.4755,-0.1539,28.8135,9.1124,28.8135
+hong_jean,fall_like,(die2) HJ motion_data.csv,2,10.36,balance_loss+impact,16.9815,False,3.4752,402.3673,7.477,21.3075,14.1467,4.1662,8.3471,16.9815,12.4967,16.9815
+hong_jean,fall_like,(die2) HJ motion_data.csv,3,15.04,balance_loss+impact,9.8267,False,2.6582,135.7492,4.0645,3.5055,9.5064,0.9548,0.8097,11.3476,7.5389,11.3476
+hong_jean,near_miss,(near miss) HJ motion_data.csv,1,53.17,balance_loss+impact,23.703,False,2.9032,199.9213,4.5338,28.9506,10.9255,1.233,21.0523,23.703,15.0611,23.703
+hong_jean,near_miss,(near miss) HJ motion_data.csv,2,1.57,balance_loss+impact,23.1682,False,3.5045,1058.3143,12.4596,14.3573,14.4285,11.9999,10.0744,23.1682,21.771,23.1682
+hong_jean,near_miss,(near miss) HJ motion_data.csv,3,45.49,balance_loss+impact,21.8388,False,3.625,284.522,3.4991,18.0544,15.1311,2.2942,12.8556,21.8388,12.6566,21.8388
+kwanteng,fall_like,KT_Fall_cleaned.csv,1,16.17,balance_loss,1433.4657,False,1.7339,1009.8245,6.8323,8.7218,243.7683,1653.0958,217.6949,325.6917,1434.3192,1434.3192
+kwanteng,fall_like,KT_Fall_cleaned.csv,2,25.69,balance_loss+impact,729.4165,False,2.335,443.3089,24.5534,7.2773,441.235,724.9883,181.5217,570.6786,794.6483,794.6483
+kwanteng,fall_like,KT_Fall_cleaned.csv,3,6.53,balance_loss+impact,531.2729,False,2.1688,491.9891,36.4496,12.9661,386.6448,804.7398,323.9785,556.578,774.9897,774.9897
+kwanteng,near_miss,KT_NearMissed_cleaned.csv,1,16.53,balance_loss+impact,19.7607,False,3.7065,354.0691,0.7218,14.4944,14.8209,4.6084,8.6325,19.7607,11.6607,19.7607
+kwanteng,near_miss,KT_NearMissed_cleaned.csv,2,4.17,balance_loss+impact,12.9555,False,3.8416,618.7024,1.4925,4.7851,15.5725,9.1729,2.2065,19.6937,16.4257,19.6937
+kwanteng,near_miss,KT_NearMissed_cleaned.csv,3,36.73,balance_loss+impact,11.9033,False,0.7763,610.4835,0.3038,15.0978,-1.4808,9.0311,9.0319,6.8827,11.9033,11.9033
+pierre,fall_like,(die) pieere.csv,1,0.19,balance_loss+impact,14.8496,False,4.66,519.0214,10.7345,4.6161,36.9394,4.5429,3.0939,43.1108,16.4501,43.1108
+pierre,fall_like,(die) pieere.csv,2,8.83,balance_loss+impact,33.8351,False,3.7493,634.9709,5.2223,7.5613,27.7433,5.7311,5.4982,33.852,18.3717,33.852
+pierre,fall_like,(die) pieere.csv,3,31.83,impact,23.1912,False,2.7486,119.6116,0.6488,14.2133,17.6385,0.4497,10.9286,23.1912,13.1091,23.1912
+pierre,near_miss,(near miss) P.csv,1,9.12,balance_loss+impact,42.9853,False,3.9403,524.8133,2.5369,18.8805,34.7407,7.9877,20.7044,42.9853,22.7706,42.9853
+pierre,near_miss,(near miss) P.csv,2,18.96,balance_loss+impact,21.63,False,2.2926,178.6234,11.7694,10.1286,15.2178,1.835,10.7471,21.63,13.234,21.63
+pierre,near_miss,(near miss) P.csv,3,66.36,balance_loss+impact,10.8172,False,1.656,150.362,3.8567,1.6405,7.6757,1.3327,1.09,10.8172,6.583,10.8172
+ziqian,fall_like,ziqian_die_data.csv,1,64.05,impact,21.8204,False,2.6675,201.9896,0.7788,2.1641,14.8141,1.6187,1.5797,21.8204,11.9078,21.8204
+ziqian,fall_like,ziqian_die_data.csv,2,33.57,balance_loss+impact,16.9365,False,2.0899,155.2439,2.0652,16.0288,9.5633,0.925,16.5816,16.9365,10.8231,16.9365
+ziqian,fall_like,ziqian_die_data.csv,3,88.09,balance_loss+impact,15.4403,False,2.0509,197.4621,4.3398,2.3551,9.2085,1.5515,1.7863,15.4403,10.0814,15.4403
+ziqian,near_miss,ziqian_near_miss_ die.csv,1,11.74,balance_loss+impact,104.9439,False,4.0358,559.9736,7.3908,34.9757,42.3061,4.2223,123.1132,104.9439,76.221,104.9439
+ziqian,near_miss,ziqian_near_miss_ die.csv,2,58.46,balance_loss+impact,96.885,False,3.9902,910.6818,22.0982,12.4082,41.6685,7.2911,43.2413,96.885,72.4582,96.885
+ziqian,near_miss,ziqian_near_miss_ die.csv,3,32.42,balance_loss+impact,70.5137,False,3.2567,496.3787,3.8201,14.2565,31.4043,3.6659,49.7828,70.5137,46.6481,70.5137
