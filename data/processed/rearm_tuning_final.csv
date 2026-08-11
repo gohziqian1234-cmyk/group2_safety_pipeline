@@ -1,0 +1,2 @@
+min_cooldown_seconds,quiet_rearm_seconds,reliable_incidents_matched,reliable_incidents_tested,reliable_detection_rate,total_extra_alerts_all_recordings,normal_recordings_with_alert,normal_recordings_tested,total_normal_alerts,uncertain_ziqian_fall_matched
+4.0,3.0,7.0,7.0,1.0,17.0,1.0,4.0,2.0,0.0
