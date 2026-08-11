@@ -1,0 +1,9 @@
+target_label,held_out_worker,rule_type,feature_1,threshold_1,feature_2,threshold_2,training_event_detection_rate,training_normal_recording_false_alarm_rate,test_event_detection_rate,test_window_sensitivity,test_window_false_positive_rate,test_normal_recording_false_alarm_rate
+near_miss,hong_jean,and_pair,gyro_max_dps,522.73324,accel_max_g,3.07238,1.0,0.0,0.0,0.0,0.0,0.0
+near_miss,kwanteng,and_pair,gyro_max_dps,370.37442,accel_max_g,3.07238,1.0,0.0,1.0,0.5,0.0,0.0
+near_miss,pierre,single,accel_max_g,3.24474,,,1.0,0.0,1.0,0.33333,0.01255,1.0
+near_miss,ziqian,and_pair,gyro_max_dps,399.01943,accel_max_g,3.07238,1.0,0.0,1.0,0.66667,0.0,0.0
+fall,hong_jean,and_pair,accel_max_g,2.69257,axis_accel_std_total_g,1.09459,1.0,0.33333,1.0,0.66667,0.0042,1.0
+fall,kwanteng,and_pair,accel_max_g,2.4981,axis_accel_std_total_g,1.19255,1.0,0.66667,0.0,0.0,0.0,0.0
+fall,pierre,and_pair,gyro_max_dps,277.7047,axis_accel_std_total_g,1.05111,1.0,0.66667,1.0,0.5,0.01255,1.0
+fall,ziqian,and_pair,gyro_max_dps,709.42694,accel_max_g,1.82851,1.0,0.0,0.0,0.0,0.0,0.0
