@@ -1207,22 +1207,10 @@ def main():
     print()
     print("=" * 72)
     print("CANDIDATE ANALYSIS FINISHED")
-    print(
-        "Incident recordings processed:",
-        processed_count,
-    )
-    print(
-        "Normal recordings skipped:",
-        skipped_normal_count,
-    )
-    print(
-        "Candidate rows created:",
-        len(candidate_report),
-    )
-    print(
-        "New label rows added:",
-        labels_added,
-    )
+    print("Incident recordings processed:",processed_count,)
+    print("Normal recordings skipped:",skipped_normal_count,)
+    print( "Candidate rows created:", len(candidate_report),)
+    print( "New label rows added:",labels_added, )
     print()
     print("Files created or updated:")
     print(CANDIDATE_OUTPUT)
