@@ -1,0 +1,436 @@
+worker,source_file,signature_label,event_subtype,center_seconds,pre_impact_min_accel_g,impact_peak_accel_g,impact_peak_gyro_dps,accel_rise_min_to_impact_g,time_min_to_impact_s,pre_impact_low_g_duration_lt_0_8_s,pre_impact_low_g_duration_lt_0_6_s,pre_impact_low_g_duration_lt_0_4_s
+hong_jean,(die2) HJ motion_data.csv,fall,fall_inactive,84.16,0.10347,6.32845,1110.79972,6.22498,1.08,0.28,0.24,0.16
+hong_jean,(near miss) HJ motion_data.csv,near_miss,near_miss,53.17,0.19962,4.24256,399.01943,4.04294,0.56,0.84,0.72,0.4
+hong_jean,motion_data (hj).csv,normal,normal_work,2.458,0.60324,1.38916,259.52167,0.78592,0.36,0.04,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,3.458,0.60324,1.7021,514.77547,1.09885,0.68,0.12,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,4.458,0.60324,1.7021,514.77547,1.09885,0.68,0.12,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,5.458,0.65238,1.7021,514.77547,1.04972,0.2,0.04,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,6.458,0.51451,1.58549,365.19343,1.07098,0.08,0.16,0.08,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,7.458,0.77548,1.45606,143.18918,0.68057,0.08,0.04,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,8.458,0.77548,1.45606,143.18918,0.68057,0.08,0.04,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,9.458,0.97465,0.98727,12.73616,0.01262,2.24,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,10.458,0.97422,0.98959,10.6295,0.01538,0.12,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,11.458,0.97422,0.99145,10.6295,0.01724,1.24,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,12.458,0.97157,1.26175,73.05555,0.29018,0.6,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,13.458,0.8772,1.33405,203.6338,0.45685,1.0,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,14.458,0.8772,1.33405,203.6338,0.45685,1.0,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,15.458,0.93119,1.33405,525.51882,0.40286,0.32,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,16.458,0.89187,1.69704,525.51882,0.80517,1.52,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,17.458,0.92622,1.69704,525.51882,0.77081,0.36,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,19.458,0.69152,1.54602,290.08839,0.8545,0.88,0.12,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,20.458,0.94799,1.54602,290.08839,0.59803,0.24,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,21.458,0.94204,1.52967,237.96103,0.58763,0.08,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,22.458,0.86283,1.41447,221.95477,0.55164,1.56,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,23.458,0.91496,1.41447,180.50536,0.49951,0.28,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,24.458,0.80515,1.42219,152.12414,0.61704,2.24,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,25.458,0.90052,1.52236,234.03704,0.62184,0.68,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,26.458,0.90052,1.52236,234.03704,0.62184,0.68,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,27.458,0.93421,1.52236,234.03704,0.58816,0.64,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,28.458,0.88327,1.29102,146.03156,0.40775,0.56,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,29.458,0.86563,1.25567,150.97808,0.39004,0.16,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,30.458,0.86563,1.25567,150.97808,0.39004,0.16,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,31.458,0.83239,1.21416,151.76499,0.38177,0.96,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,32.458,0.98338,1.21416,172.33249,0.23078,0.32,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,33.458,0.28969,2.27145,190.01565,1.98177,0.52,0.36,0.16,0.08
+hong_jean,motion_data (hj).csv,normal,normal_work,34.458,0.28969,2.27145,211.08118,1.98177,0.52,0.36,0.16,0.08
+hong_jean,motion_data (hj).csv,normal,normal_work,35.458,0.28969,2.27145,211.08118,1.98177,0.52,0.36,0.16,0.08
+hong_jean,motion_data (hj).csv,normal,normal_work,36.458,0.22578,2.4572,436.34364,2.23142,0.12,0.56,0.24,0.12
+hong_jean,motion_data (hj).csv,normal,normal_work,37.458,0.22578,2.4572,472.00166,2.23142,0.12,0.24,0.12,0.12
+hong_jean,motion_data (hj).csv,normal,normal_work,38.458,0.22578,2.4572,472.00166,2.23142,0.12,0.12,0.12,0.12
+hong_jean,motion_data (hj).csv,normal,normal_work,39.458,0.32008,2.36362,472.00166,2.04353,0.16,0.2,0.08,0.04
+hong_jean,motion_data (hj).csv,normal,normal_work,40.458,0.5721,1.32418,203.57047,0.75207,0.92,0.08,0.04,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,41.458,0.5721,1.32418,203.57047,0.75207,0.92,0.08,0.04,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,42.458,1.01404,1.32418,137.42403,0.31014,0.44,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,43.458,0.89225,1.30173,173.34025,0.40948,0.96,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,44.458,0.8481,1.34465,238.71526,0.49655,2.44,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,45.458,0.88512,1.34465,238.71526,0.45953,1.08,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,46.458,1.00891,1.34465,238.71526,0.33575,0.12,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,47.458,0.84538,1.36603,231.49654,0.52064,2.8,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,48.458,0.92272,1.36603,197.35576,0.44331,1.0,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,49.458,0.9422,1.36603,197.35576,0.42383,0.92,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,50.458,0.82844,1.59588,202.98232,0.76745,0.24,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,51.458,0.82844,1.59588,202.98232,0.76745,0.24,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,53.458,0.59357,1.17924,200.97885,0.58567,0.56,0.12,0.04,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,55.458,0.92114,1.34376,113.70106,0.42262,0.32,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,56.458,0.92114,1.34376,187.8183,0.42262,0.32,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,57.458,0.9608,1.34376,187.8183,0.38295,0.12,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,58.458,0.90323,1.19083,187.8183,0.2876,1.04,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,59.458,0.73091,1.46117,182.56565,0.73026,1.0,0.6,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,60.458,0.73091,1.46117,245.39341,0.73026,1.0,0.6,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,61.458,0.773,1.46117,245.39341,0.68818,0.2,0.12,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,62.458,0.93391,1.41707,245.39341,0.48316,0.32,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,63.458,0.94718,1.30277,233.841,0.35559,0.72,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,64.458,0.8525,1.29136,187.51781,0.43886,0.16,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,65.458,0.8525,1.29136,187.51781,0.43886,0.16,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,66.458,0.8525,1.29136,187.51781,0.43886,0.16,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,67.458,0.8927,1.20298,175.00128,0.31028,0.08,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,68.458,0.94379,1.19256,136.72209,0.24877,0.24,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,69.458,0.87861,1.15266,79.20887,0.27404,0.68,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,70.458,0.99986,1.02156,27.57714,0.0217,0.12,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,71.458,0.96542,1.01757,25.38873,0.05215,0.92,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,72.458,0.95807,1.21561,130.13451,0.25755,2.16,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,73.458,0.97339,1.21561,130.13451,0.24222,0.76,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,74.458,0.98813,1.21561,203.81072,0.22749,0.28,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,75.458,0.65337,1.49089,203.81072,0.83752,0.6,0.24,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,76.458,0.45538,1.67324,203.81072,1.21786,1.0,0.56,0.08,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,77.458,0.45538,1.67324,162.1522,1.21786,1.0,0.32,0.08,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,78.458,0.56638,1.67324,162.1522,1.10686,0.56,0.16,0.04,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,80.458,1.33482,1.40641,130.776,0.07159,0.24,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,81.458,0.82559,1.34976,149.61916,0.52418,0.8,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,82.458,0.69756,1.72604,402.76582,1.02849,1.72,0.24,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,83.458,0.95962,1.72604,402.76582,0.76642,0.56,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,84.458,0.95983,1.72604,402.76582,0.76621,0.04,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,86.458,0.62828,1.46855,163.89659,0.84027,0.6,0.32,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,87.458,0.62828,1.46855,163.89659,0.84027,0.6,0.28,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,88.458,0.76539,1.46855,152.93251,0.70316,0.52,0.04,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,89.458,0.49789,1.31827,152.93251,0.82038,0.2,0.36,0.08,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,90.458,0.49789,1.39398,153.15736,0.89609,1.28,0.28,0.08,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,91.458,0.60956,1.39398,153.15736,0.78441,0.52,0.16,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,92.458,0.62457,1.50699,180.63507,0.88242,1.64,0.16,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,93.458,0.92499,1.50699,180.63507,0.582,1.04,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,94.458,0.95687,1.50699,191.57191,0.55012,0.08,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,95.458,0.80919,1.37162,277.45161,0.56243,0.24,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,96.458,0.80919,1.42491,277.45161,0.61573,1.0,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,97.458,0.80919,1.42491,277.45161,0.61573,1.0,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,99.458,0.84391,1.37413,285.13514,0.53022,0.8,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,100.458,0.92951,1.37413,285.13514,0.44462,0.4,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,101.458,0.81406,1.46604,285.13514,0.65198,1.12,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,102.458,0.81406,1.46604,187.7091,0.65198,1.12,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,103.458,0.97781,1.46604,187.7091,0.48823,0.08,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,104.458,0.90362,1.38083,208.16727,0.4772,0.72,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,105.458,0.75809,1.2703,211.1819,0.5122,0.68,0.04,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,106.458,0.58624,1.39576,222.6687,0.80952,2.04,0.16,0.04,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,107.458,0.60697,1.39576,222.6687,0.78879,0.6,0.08,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,108.458,0.67734,2.97259,262.45264,2.29525,0.32,0.4,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,109.458,0.67734,2.97259,527.17349,2.29525,0.32,0.36,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,110.458,0.67734,2.97259,527.17349,2.29525,0.32,0.28,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,111.458,0.30456,2.67438,554.2383,2.36982,0.92,0.32,0.32,0.24
+hong_jean,motion_data (hj).csv,normal,normal_work,112.458,0.53815,2.70269,554.2383,2.16453,0.2,0.28,0.08,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,113.458,0.53815,2.70269,554.2383,2.16453,0.2,0.08,0.08,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,116.458,0.97868,1.16569,163.54323,0.187,0.48,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,117.458,0.97868,1.16569,163.54323,0.187,0.48,0.0,0.0,0.0
+hong_jean,motion_data (hj).csv,normal,normal_work,118.458,0.97868,1.16569,248.77217,0.187,0.48,0.0,0.0,0.0
+kwanteng,KT_Fall_cleaned.csv,fall,fall_recovery,16.17,0.87674,3.04519,1129.87079,2.16845,0.4,0.0,0.0,0.0
+kwanteng,KT_NearMissed_cleaned.csv,near_miss,near_miss,16.53,0.44426,4.01486,1130.86639,3.5706,0.84,0.16,0.08,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,3.029,0.67654,1.81681,256.85647,1.14028,0.76,0.2,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,4.029,0.67654,1.81681,477.17482,1.14028,0.76,0.08,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,5.029,0.95292,1.81681,477.17482,0.86389,0.12,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,6.029,0.44788,1.73763,477.17482,1.28975,0.8,0.32,0.16,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,7.029,0.87658,1.13544,97.33526,0.25885,0.24,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,8.029,0.89303,1.26157,153.62935,0.36854,0.4,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,9.029,0.89303,1.2683,434.62466,0.37527,1.0,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,10.029,0.89303,1.2683,434.62466,0.37527,1.0,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,11.029,1.00548,1.2683,434.62466,0.26282,0.16,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,12.029,0.85791,1.25734,143.99878,0.39943,1.36,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,13.029,0.85791,1.25734,274.63911,0.39943,1.36,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,14.029,0.81516,1.42557,274.63911,0.61041,0.32,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,15.029,0.81516,1.47703,274.63911,0.66187,1.0,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,16.029,0.81516,1.47703,244.82302,0.66187,1.0,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,17.029,0.59279,1.4906,244.82302,0.89782,1.32,0.48,0.04,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,18.029,0.68831,1.4906,189.0743,0.8023,0.2,0.32,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,19.029,0.58549,1.50704,189.0743,0.92155,1.0,0.24,0.08,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,20.029,0.58549,1.50704,178.25553,0.92155,1.0,0.16,0.08,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,21.029,1.45669,1.50704,162.56337,0.05035,0.2,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,22.029,0.59228,1.48727,155.09471,0.895,0.16,0.2,0.04,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,23.029,0.58086,1.47367,167.34655,0.89281,1.0,0.08,0.04,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,24.029,0.58086,1.47367,167.34655,0.89281,1.0,0.08,0.04,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,26.029,0.7625,1.45417,203.0173,0.69167,0.2,0.2,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,27.029,0.8427,1.37024,203.0173,0.52755,2.04,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,28.029,0.74443,1.61632,203.0173,0.87189,0.12,0.12,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,29.029,0.74443,1.61632,179.00372,0.87189,0.12,0.12,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,30.029,0.74443,1.61632,155.5026,0.87189,0.12,0.12,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,31.029,0.65935,1.42622,158.17683,0.76687,1.64,0.48,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,32.029,0.65935,1.42622,158.17683,0.76687,1.64,0.36,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,33.029,0.70001,1.42622,160.2287,0.72621,0.28,0.16,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,34.029,0.75792,1.37458,176.31465,0.61667,0.08,0.08,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,35.029,0.85863,1.2923,176.31465,0.43367,0.52,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,36.029,0.85488,1.33909,181.99101,0.48421,1.0,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,37.029,0.85488,1.33909,181.99101,0.48421,1.0,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,38.029,0.74384,1.34803,181.99101,0.60419,0.28,0.16,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,39.029,0.74384,1.36986,147.2135,0.62602,0.92,0.16,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,40.029,0.74384,1.37701,155.25494,0.63317,2.44,0.16,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,41.029,0.83886,1.37701,155.25494,0.53815,0.68,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,42.029,0.82905,1.4134,155.25494,0.58435,1.32,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,43.029,0.82905,1.4134,185.92106,0.58435,1.32,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,44.029,0.95005,1.4134,185.92106,0.46335,0.44,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,45.029,1.1688,1.34439,185.92106,0.17559,0.16,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,46.029,0.78316,1.23847,184.85875,0.45531,1.88,0.24,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,47.029,0.78575,1.33868,184.85875,0.55293,1.0,0.16,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,48.029,0.78575,1.33868,152.70735,0.55293,1.0,0.16,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,49.029,1.09353,1.33868,152.70735,0.24515,0.16,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,50.029,0.83954,1.28556,145.63161,0.44602,1.2,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,51.029,0.83954,1.29217,141.67309,0.45263,2.8,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,52.029,0.86347,1.32166,141.67309,0.4582,1.56,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,53.029,0.86347,1.32166,144.93618,0.4582,1.56,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,54.029,0.81351,1.3292,144.93618,0.51568,2.08,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,55.029,0.87338,1.3292,144.93618,0.45581,1.08,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,56.029,0.8569,1.34263,144.24162,0.48573,1.04,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,57.029,0.8569,1.34263,152.65738,0.48573,1.04,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,58.029,0.96749,1.34263,152.65738,0.37514,0.4,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,59.029,0.78352,1.30767,152.65738,0.52415,0.84,0.04,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,61.029,0.85024,1.28417,128.29517,0.43394,1.12,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,62.029,0.88967,1.28417,125.7225,0.3945,0.64,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,64.029,0.81263,1.3225,155.07453,0.50987,0.32,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,65.029,0.81263,1.3225,155.07453,0.50987,0.32,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,66.029,0.81263,1.3225,137.43665,0.50987,0.32,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,67.029,0.95083,1.2903,132.23743,0.33947,0.48,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,68.029,0.83349,1.28103,131.26772,0.44755,0.36,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,69.029,0.83349,1.35218,133.27704,0.5187,1.24,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,70.029,0.87052,1.35893,133.27704,0.48842,1.4,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,71.029,0.87052,1.35893,133.27704,0.48842,1.4,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,72.029,0.92932,1.35893,133.54814,0.42961,0.24,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,73.029,0.78463,1.35712,133.54814,0.57248,1.08,0.04,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,75.029,0.82043,1.27363,130.10375,0.45321,0.4,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,76.029,0.81811,1.39919,143.85311,0.58108,0.6,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,77.029,0.81811,1.39919,143.85311,0.58108,0.6,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,78.029,0.81811,1.39919,143.85311,0.58108,0.6,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,79.029,0.77693,1.30328,153.31381,0.52635,0.4,0.12,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,80.029,0.99057,1.26747,153.31381,0.27691,0.36,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,81.029,0.82888,1.25511,153.31381,0.42623,2.44,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,82.029,0.85428,1.25511,128.77542,0.40083,1.12,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,83.029,0.87698,1.25511,127.96389,0.37813,0.64,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,84.029,0.78575,1.23471,111.99517,0.44896,0.24,0.08,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,85.029,0.88606,1.16592,116.81452,0.27985,1.76,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,86.029,0.88606,1.20104,116.81452,0.31498,2.44,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,87.029,0.90384,1.20104,116.81452,0.29721,0.56,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,88.029,0.90384,1.20104,109.7391,0.29721,0.56,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,89.029,0.91614,1.21017,126.79484,0.29402,1.48,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,90.029,0.86083,1.26056,126.79484,0.39973,0.28,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,91.029,0.86083,1.27,180.54128,0.40917,1.4,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,92.029,0.68367,1.57899,180.54128,0.89532,0.2,0.16,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,93.029,0.68367,1.57899,180.54128,0.89532,0.2,0.16,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,95.029,0.83384,1.39964,157.45661,0.5658,0.2,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,96.029,0.83384,1.39964,175.43551,0.5658,0.2,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,97.029,0.83384,1.39964,175.43551,0.5658,0.2,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,98.029,0.97549,1.29314,175.43551,0.31765,0.4,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,99.029,0.89316,1.251,99.54788,0.35784,0.84,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,100.029,0.81505,1.30594,133.43518,0.4909,1.6,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,101.029,0.81505,1.30594,162.27923,0.4909,1.6,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,102.029,0.79969,1.33719,162.27923,0.5375,0.56,0.04,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,103.029,0.79969,1.33719,162.27923,0.5375,0.56,0.04,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,104.029,0.85711,1.33719,124.46746,0.48008,0.2,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,105.029,0.82559,1.29796,141.10813,0.47237,0.16,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,106.029,0.82559,1.29796,141.10813,0.47237,0.16,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,107.029,0.82559,1.29796,141.10813,0.47237,0.16,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,108.029,0.94732,1.2421,119.25525,0.29478,0.12,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,109.029,0.88533,1.24205,144.46974,0.35673,0.24,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,110.029,0.88533,1.24205,144.46974,0.35673,0.24,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,111.029,0.9763,1.24153,144.46974,0.26523,0.6,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,112.029,0.8242,1.36678,135.67457,0.54259,1.6,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,113.029,0.89716,1.36678,168.30684,0.46962,0.56,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,114.029,0.97545,1.36678,168.30684,0.39134,0.16,0.0,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,115.029,0.75133,1.35161,168.30684,0.60028,0.36,0.2,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,116.029,0.75133,1.35161,149.78566,0.60028,0.36,0.2,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,117.029,0.75133,1.35161,127.32446,0.60028,0.36,0.2,0.0,0.0
+kwanteng,KT_Normal.csv,normal,normal_work,118.029,0.80907,1.29849,165.46494,0.48942,0.72,0.0,0.0,0.0
+pierre,(die) pieere.csv,fall,fall_recovery,8.83,0.49769,4.04053,800.13579,3.54283,0.76,0.4,0.28,0.0
+pierre,(near miss) P.csv,near_miss,near_miss,9.12,0.85712,4.04181,576.12238,3.18469,1.36,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,2.029,0.39752,1.75098,990.95399,1.35346,1.92,0.2,0.12,0.04
+pierre,(normal) P motion_data.csv,normal,normal_work,3.029,0.54128,1.75098,990.95399,1.2097,0.64,0.08,0.04,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,4.029,0.96064,1.75098,304.64253,0.79034,0.2,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,5.029,0.59641,1.50243,245.50862,0.90602,1.28,0.2,0.04,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,6.029,0.59641,1.51941,198.43873,0.923,2.68,0.28,0.04,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,7.029,0.57028,1.53864,227.05139,0.96836,0.04,0.36,0.16,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,8.029,0.57028,1.53864,252.1435,0.96836,0.04,0.2,0.16,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,9.029,0.57028,1.53864,252.1435,0.96836,0.04,0.2,0.16,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,10.029,1.00254,1.37206,259.94407,0.36952,0.24,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,11.029,0.70242,1.36387,259.94407,0.66145,0.12,0.12,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,12.029,0.70242,1.40287,259.94407,0.70045,1.44,0.12,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,13.029,0.70242,1.40287,318.69257,0.70045,1.44,0.12,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,14.029,0.71976,1.42878,318.69257,0.70902,1.16,0.28,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,15.029,0.71976,1.42878,318.69257,0.70902,1.16,0.28,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,16.029,0.91265,1.42878,204.98485,0.51613,0.68,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,17.029,0.73933,1.82224,204.98485,1.0829,0.6,0.24,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,18.029,0.73933,1.82224,244.61465,1.0829,0.6,0.2,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,19.029,0.62955,2.02412,244.61465,1.39457,0.68,0.44,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,20.029,0.62955,2.02412,244.61465,1.39457,0.68,0.24,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,21.029,0.86754,2.02412,298.79645,1.15657,0.2,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,22.029,0.33742,2.25373,298.79645,1.91631,1.32,0.4,0.28,0.08
+pierre,(normal) P motion_data.csv,normal,normal_work,23.029,0.57666,2.25373,298.79645,1.67707,1.16,0.12,0.04,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,24.029,1.13852,2.25373,217.61448,1.11521,0.12,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,25.029,0.7969,1.50301,207.99319,0.7061,0.08,0.08,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,26.029,0.52746,1.62891,207.99319,1.10146,0.08,0.2,0.16,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,27.029,0.52746,2.03973,211.76794,1.51227,1.12,0.36,0.2,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,28.029,0.52746,2.03973,258.66975,1.51227,1.12,0.36,0.2,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,29.029,0.35576,2.48185,661.70521,2.12609,0.24,0.6,0.4,0.16
+pierre,(normal) P motion_data.csv,normal,normal_work,30.029,0.35576,2.48185,661.70521,2.12609,0.24,0.48,0.36,0.16
+pierre,(normal) P motion_data.csv,normal,normal_work,31.029,0.35576,3.99668,661.70521,3.64092,1.64,0.44,0.24,0.16
+pierre,(normal) P motion_data.csv,normal,normal_work,32.029,0.56697,3.99668,345.20311,3.42971,1.0,0.12,0.04,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,33.029,1.45818,3.99668,345.20311,2.5385,0.36,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,34.029,0.51519,1.82283,276.94053,1.30763,0.88,0.44,0.12,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,35.029,0.51519,1.82283,276.94053,1.30763,0.88,0.16,0.08,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,36.029,0.81852,1.82283,288.09065,1.00431,0.32,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,37.029,0.51096,2.65947,288.09065,2.14852,0.16,0.4,0.04,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,38.029,0.17223,3.07543,288.09065,2.90321,0.28,0.76,0.28,0.12
+pierre,(normal) P motion_data.csv,normal,normal_work,39.029,0.17223,3.07543,252.08856,2.90321,0.28,0.68,0.28,0.12
+pierre,(normal) P motion_data.csv,normal,normal_work,40.029,0.17223,3.07543,275.79165,2.90321,0.28,0.48,0.24,0.12
+pierre,(normal) P motion_data.csv,normal,normal_work,41.029,0.27189,2.40002,275.79165,2.12812,1.12,0.72,0.48,0.28
+pierre,(normal) P motion_data.csv,normal,normal_work,42.029,0.30379,2.40002,275.79165,2.09623,0.2,0.4,0.24,0.12
+pierre,(normal) P motion_data.csv,normal,normal_work,43.029,0.33731,2.35144,233.3008,2.01414,0.72,0.6,0.44,0.08
+pierre,(normal) P motion_data.csv,normal,normal_work,44.029,0.33731,2.35144,232.73048,2.01414,0.72,0.44,0.28,0.04
+pierre,(normal) P motion_data.csv,normal,normal_work,45.029,2.15022,2.35144,232.73048,0.20122,0.16,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,47.029,0.6886,1.68829,277.43182,0.99969,0.88,0.24,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,48.029,0.6886,1.68829,277.43182,0.99969,0.88,0.16,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,49.029,0.48873,1.88526,277.43182,1.39652,2.04,0.68,0.2,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,50.029,0.67866,1.88526,260.01885,1.2066,0.84,0.36,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,51.029,0.98802,1.88526,303.30773,0.89724,0.08,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,52.029,0.50856,1.86343,303.30773,1.35487,0.12,0.12,0.12,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,53.029,0.9081,1.62633,303.30773,0.71823,0.36,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,54.029,0.75577,1.46872,284.95197,0.71295,0.08,0.08,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,55.029,0.71115,1.54888,264.63992,0.83773,0.08,0.44,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,56.029,0.71115,1.54888,237.07445,0.83773,0.08,0.44,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,58.029,0.98288,1.38045,166.17539,0.39757,0.16,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,59.029,0.79702,1.71059,209.19574,0.91358,1.76,0.04,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,60.029,0.79016,1.885,209.19574,1.09483,0.28,0.08,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,61.029,0.79016,1.885,210.38008,1.09483,0.28,0.04,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,62.029,0.79016,1.885,210.38008,1.09483,0.28,0.04,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,63.029,0.45187,1.3394,210.38008,0.88753,0.2,0.16,0.16,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,64.029,0.89216,1.08351,193.85874,0.19135,0.52,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,65.029,0.89216,1.08351,250.12809,0.19135,0.52,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,66.029,0.88342,1.5216,323.02785,0.63818,0.6,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,67.029,0.88342,1.5216,323.02785,0.63818,0.6,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,69.029,0.74334,1.32111,203.7362,0.57778,2.08,0.08,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,70.029,0.83203,1.32111,184.03734,0.48908,0.64,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,71.029,0.87458,1.32111,184.03734,0.44654,0.32,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,72.029,0.78271,1.35126,198.40677,0.56855,2.36,0.04,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,73.029,0.90318,1.35126,198.40677,0.44808,0.2,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,74.029,0.90318,1.35126,203.01562,0.44808,0.2,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,75.029,0.74737,1.5386,213.54199,0.79123,0.88,0.36,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,76.029,0.74737,1.5386,213.54199,0.79123,0.88,0.36,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,77.029,0.6776,1.75943,216.11656,1.08183,2.08,0.44,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,78.029,0.70796,1.75943,216.11656,1.05147,0.96,0.12,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,79.029,0.95657,1.75943,216.11656,0.80286,0.2,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,81.029,0.53778,1.46488,209.86111,0.92711,1.44,0.2,0.08,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,82.029,0.91483,1.46488,241.78137,0.55006,1.0,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,83.029,0.24722,2.38592,427.64548,2.13871,0.2,0.12,0.12,0.08
+pierre,(normal) P motion_data.csv,normal,normal_work,84.029,0.24722,2.38592,427.64548,2.13871,0.2,0.12,0.12,0.08
+pierre,(normal) P motion_data.csv,normal,normal_work,85.029,0.24722,2.38592,427.64548,2.13871,0.2,0.12,0.12,0.08
+pierre,(normal) P motion_data.csv,normal,normal_work,86.029,0.59316,2.12758,286.39834,1.53442,0.64,0.08,0.04,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,87.029,0.29529,1.80467,286.39834,1.50938,2.16,0.12,0.08,0.08
+pierre,(normal) P motion_data.csv,normal,normal_work,88.029,0.79851,1.80467,286.39834,1.00617,0.4,0.04,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,89.029,0.91179,1.80467,272.46387,0.89288,0.04,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,90.029,0.72374,1.7689,272.46387,1.04516,2.0,0.12,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,91.029,0.77091,1.7689,257.22229,0.99799,1.36,0.04,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,92.029,0.62662,2.03035,257.22229,1.40373,0.16,0.12,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,93.029,0.62662,2.03035,257.22229,1.40373,0.16,0.12,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,94.029,0.62662,2.03035,208.29419,1.40373,0.16,0.12,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,95.029,0.75337,1.5333,203.49882,0.77993,0.52,0.04,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,96.029,0.47252,1.72767,230.2071,1.25515,1.0,0.44,0.08,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,97.029,0.47252,1.75664,230.2071,1.28412,2.08,0.24,0.08,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,98.029,0.43429,3.07238,230.2071,2.63809,0.2,0.2,0.08,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,99.029,0.43429,3.07238,206.26988,2.63809,0.2,0.2,0.08,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,100.029,0.43429,3.07238,264.21558,2.63809,0.2,0.12,0.08,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,101.029,0.34541,2.62893,264.21558,2.28352,0.52,0.36,0.2,0.08
+pierre,(normal) P motion_data.csv,normal,normal_work,102.029,0.73885,2.40757,264.21558,1.66872,0.36,0.08,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,104.029,0.24682,1.91023,259.27594,1.6634,0.44,0.32,0.32,0.32
+pierre,(normal) P motion_data.csv,normal,normal_work,106.029,0.13228,2.56076,304.2915,2.42848,1.16,1.56,1.56,1.28
+pierre,(normal) P motion_data.csv,normal,normal_work,107.029,0.13228,2.56076,304.2915,2.42848,1.16,1.04,1.04,0.76
+pierre,(normal) P motion_data.csv,normal,normal_work,108.029,0.49998,2.56076,304.2915,2.06078,0.16,0.04,0.04,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,109.029,0.34833,2.35788,251.86682,2.00955,1.64,0.8,0.24,0.08
+pierre,(normal) P motion_data.csv,normal,normal_work,110.029,0.69518,2.35788,251.86682,1.6627,0.12,0.2,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,111.029,0.26386,2.19509,251.86682,1.93123,2.04,0.72,0.44,0.12
+pierre,(normal) P motion_data.csv,normal,normal_work,112.029,0.38927,3.20721,272.33207,2.81794,0.52,0.56,0.36,0.04
+pierre,(normal) P motion_data.csv,normal,normal_work,113.029,0.38927,3.20721,272.33207,2.81794,0.52,0.52,0.36,0.04
+pierre,(normal) P motion_data.csv,normal,normal_work,114.029,0.43663,3.20721,281.33763,2.77058,0.12,0.16,0.12,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,117.029,0.86334,1.3498,141.04345,0.48647,0.24,0.0,0.0,0.0
+pierre,(normal) P motion_data.csv,normal,normal_work,118.029,1.10474,1.3498,141.04345,0.24507,0.2,0.0,0.0,0.0
+ziqian,ziqian_die_data.csv,fall,fall_recovery,64.05,0.66511,2.69863,317.04675,2.03351,0.24,0.12,0.0,0.0
+ziqian,ziqian_near_miss_ die.csv,near_miss,near_miss,58.46,0.84198,4.88124,969.90084,4.03927,1.36,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,2.104,0.98336,1.00683,3.96147,0.02347,0.32,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,4.104,0.98805,0.99905,260.16028,0.011,0.36,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,5.104,0.80044,1.59375,489.40896,0.79331,0.12,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,6.104,0.80044,1.96617,489.40896,1.16573,2.0,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,7.104,0.85516,2.03416,489.40896,1.179,2.0,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,8.104,0.93764,2.03416,373.19634,1.09652,0.72,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,10.104,1.71089,1.79395,295.84866,0.08305,0.2,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,11.104,0.66423,1.73032,295.84866,1.06609,1.96,0.16,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,12.104,0.86068,1.73032,277.57322,0.86964,0.6,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,13.104,1.13283,1.73032,277.57322,0.59749,0.28,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,14.104,0.77339,1.62163,258.65504,0.84824,0.28,0.08,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,15.104,0.77339,1.62294,258.65504,0.84954,0.96,0.08,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,16.104,0.77339,1.62294,258.65504,0.84954,0.96,0.08,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,17.104,0.75233,1.67762,233.55915,0.92529,0.96,0.4,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,18.104,0.75233,1.72902,254.93488,0.97669,1.48,0.12,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,19.104,0.92907,1.72902,254.93488,0.79995,1.08,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,20.104,0.82382,1.81447,302.90993,0.99065,0.88,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,21.104,0.82382,1.81447,302.90993,0.99065,0.88,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,22.104,0.8864,1.81447,302.90993,0.92807,0.24,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,23.104,1.03648,1.46061,238.7688,0.42413,0.28,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,24.104,0.88715,1.42714,238.7688,0.53999,0.08,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,26.104,0.64449,1.69927,281.67598,1.05478,0.24,0.44,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,27.104,0.49004,1.90065,297.8191,1.41061,0.12,0.68,0.24,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,28.104,0.49004,1.90065,306.30593,1.41061,0.12,0.4,0.24,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,29.104,0.49004,1.90065,306.30593,1.41061,0.12,0.24,0.24,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,30.104,0.69645,1.86974,306.30593,1.17329,2.08,0.12,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,31.104,0.77793,2.99633,271.07722,2.2184,1.52,0.12,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,32.104,0.77793,2.99633,271.07722,2.2184,1.52,0.12,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,33.104,0.7791,2.99633,288.03805,2.21723,0.2,0.08,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,35.104,1.07045,1.88106,288.03805,0.81061,0.2,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,37.104,0.55363,1.93551,295.12919,1.38188,0.16,0.2,0.16,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,38.104,0.55363,1.93551,295.12919,1.38188,0.16,0.2,0.16,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,39.104,0.55363,1.93551,295.12919,1.38188,0.16,0.2,0.16,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,40.104,0.69309,1.57906,293.01168,0.88597,0.36,0.08,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,41.104,0.69309,1.57906,293.01168,0.88597,0.36,0.08,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,42.104,0.69309,1.57906,293.01168,0.88597,0.36,0.08,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,43.104,1.2015,1.38108,157.80824,0.17958,0.2,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,45.104,0.77351,1.36938,195.57658,0.59587,1.36,0.24,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,46.104,0.77351,1.76678,254.33144,0.99327,2.64,0.24,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,47.104,0.62718,1.97488,338.89514,1.3477,0.12,0.24,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,48.104,0.62718,2.15442,367.52273,1.52724,1.76,0.24,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,49.104,0.62718,2.15442,440.57113,1.52724,1.76,0.24,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,50.104,0.85127,2.15442,440.57113,1.30315,0.56,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,51.104,0.38019,2.09492,440.57113,1.71472,0.04,0.12,0.08,0.04
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,52.104,0.38019,2.80499,295.65979,2.42479,0.56,0.12,0.08,0.04
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,53.104,0.38019,2.80499,295.65979,2.42479,0.56,0.12,0.08,0.04
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,55.104,0.11639,2.6203,433.76657,2.50391,2.88,1.36,0.88,0.16
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,56.104,0.4705,2.6203,433.76657,2.1498,0.92,0.68,0.24,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,57.104,0.46062,2.80293,522.48831,2.34231,0.88,0.56,0.16,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,58.104,0.46062,2.80293,522.48831,2.34231,0.88,0.32,0.08,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,59.104,0.67767,2.80293,522.48831,2.12525,0.6,0.12,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,60.104,0.42082,2.3854,391.67768,1.96458,0.48,0.52,0.08,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,61.104,0.42082,2.3854,237.09397,1.96458,0.48,0.28,0.08,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,62.104,0.45085,2.29717,216.12902,1.84632,0.24,0.04,0.04,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,63.104,0.74224,1.50869,220.84415,0.76645,2.84,0.08,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,64.104,0.83984,1.50869,220.84415,0.66885,0.24,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,65.104,0.83984,1.50869,220.84415,0.66885,0.24,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,66.104,0.91102,1.38181,208.81214,0.47078,2.12,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,67.104,0.8454,2.36317,522.73324,1.51777,0.92,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,68.104,0.8454,2.36317,522.73324,1.51777,0.92,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,69.104,0.8454,2.36317,522.73324,1.51777,0.92,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,70.104,0.20381,2.31333,367.10986,2.10952,0.24,0.4,0.2,0.2
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,71.104,0.20381,2.31333,289.85601,2.10952,0.24,0.2,0.2,0.2
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,72.104,0.32986,1.13095,143.01493,0.80109,0.68,0.4,0.36,0.36
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,73.104,0.93305,1.0684,75.35943,0.13534,2.44,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,74.104,0.87579,1.07316,323.85874,0.19737,0.68,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,75.104,0.77831,1.25698,323.85874,0.47867,0.16,0.04,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,76.104,0.77831,1.25698,323.85874,0.47867,0.16,0.04,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,77.104,0.77445,1.71114,412.12055,0.93669,0.28,0.08,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,78.104,0.77445,1.71114,494.71907,0.93669,0.28,0.04,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,79.104,0.77445,1.71114,494.71907,0.93669,0.28,0.04,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,80.104,0.75452,1.59559,494.71907,0.84107,0.12,0.16,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,82.104,0.97375,1.23229,171.7719,0.25854,1.12,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,83.104,0.99816,1.23229,171.7719,0.23414,0.68,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,84.104,0.91706,1.22894,171.7719,0.31187,0.36,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,85.104,0.7647,1.33828,205.16241,0.57359,0.96,0.08,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,86.104,0.7647,1.58228,254.64671,0.81758,1.92,0.08,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,87.104,0.80591,1.58228,365.07682,0.77637,0.52,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,88.104,0.80591,1.58228,365.07682,0.77637,0.52,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,90.104,0.70081,1.19843,264.39181,0.49762,0.2,0.12,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,91.104,0.70081,1.44379,347.06584,0.74298,0.88,0.12,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,92.104,0.05548,2.32666,358.45902,2.27119,0.16,0.44,0.24,0.16
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,93.104,0.05548,2.32666,358.45902,2.27119,0.16,0.32,0.24,0.16
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,94.104,0.05548,2.32666,358.45902,2.27119,0.16,0.12,0.12,0.08
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,96.104,0.9975,0.99825,4.33415,0.00075,2.0,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,97.104,0.9975,0.99825,4.33415,0.00075,1.04,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,104.104,0.99569,0.99654,0.42355,0.00085,2.08,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,105.104,0.99569,0.99654,0.45651,0.00085,1.96,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,106.104,0.99569,0.99654,0.45651,0.00085,0.96,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,108.104,0.92188,1.40339,538.14455,0.48151,0.36,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,109.104,0.41118,1.60086,538.14455,1.18968,0.44,0.52,0.52,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,110.104,0.41118,1.99335,538.14455,1.58216,1.32,0.52,0.52,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,111.104,0.41118,2.67981,499.78468,2.26863,1.64,0.52,0.52,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,112.104,1.00905,2.67981,481.06068,1.67076,0.8,0.0,0.0,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,114.104,0.42618,2.3625,410.2873,1.93632,0.24,0.24,0.16,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,115.104,0.42618,2.3625,410.2873,1.93632,0.24,0.24,0.16,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,117.104,0.53239,1.75966,344.324,1.22727,1.72,0.16,0.08,0.0
+ziqian,ziqian_normal_work_data.csv,normal,normal_work,118.104,0.89787,1.75966,344.324,0.86179,0.56,0.0,0.0,0.0
