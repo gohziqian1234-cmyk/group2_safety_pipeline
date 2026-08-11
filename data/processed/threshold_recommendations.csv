@@ -1,0 +1,7 @@
+target_label,feature,threshold,tp,fn,fp,tn,window_sensitivity,window_false_positive_rate,window_specificity,window_precision,event_detection_rate,target_event_count,normal_recording_false_alarm_rate,normal_recording_count,selection_reason
+fall,accel_max_g,2.69863,12.0,12.0,22.0,931.0,0.5,0.02308,0.97692,0.35294,1.0,4.0,0.75,4.0,"100% recorded-event detection, then minimise false alarms"
+fall,axis_accel_std_total_g,1.10681,10.0,14.0,7.0,946.0,0.41667,0.00735,0.99265,0.58824,1.0,4.0,0.75,4.0,"100% recorded-event detection, then minimise false alarms"
+fall,gyro_max_dps,317.04675,18.0,6.0,90.0,863.0,0.75,0.09444,0.90556,0.16667,1.0,4.0,1.0,4.0,"100% recorded-event detection, then minimise false alarms"
+near_miss,accel_max_g,4.01486,10.0,14.0,0.0,953.0,0.41667,0.0,1.0,1.0,1.0,4.0,0.0,4.0,"100% recorded-event detection, then minimise false alarms"
+near_miss,axis_accel_std_total_g,1.29045,9.0,15.0,2.0,951.0,0.375,0.0021,0.9979,0.81818,1.0,4.0,0.25,4.0,"100% recorded-event detection, then minimise false alarms"
+near_miss,gyro_max_dps,576.12238,10.0,14.0,4.0,949.0,0.41667,0.0042,0.9958,0.71429,1.0,4.0,0.25,4.0,"100% recorded-event detection, then minimise false alarms"
