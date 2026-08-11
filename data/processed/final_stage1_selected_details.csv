@@ -1,0 +1,13 @@
+worker,source_file,recording_type,is_normal_recording,expected_event_time_seconds,expected_event_type,reliable_for_score,number_of_alerts,confirmed_event_matched,nearest_detection_error_seconds,extra_alert_count,alert_times_seconds
+hong_jean,(die2) HJ motion_data.csv,fall_like,False,84.16,fall_inactive,True,3,True,1.118,2,"10.54,37.54,83.04"
+hong_jean,(near miss) HJ motion_data.csv,near_miss,False,53.17,near_miss,True,5,True,0.083,4,"45.09,53.09,65.09,77.09,89.59"
+hong_jean,motion_data (hj).csv,normal_work,True,,normal,False,0,False,,0,
+kwanteng,KT_Fall_cleaned.csv,fall_like,False,16.17,fall_recovery,True,1,True,0.804,0,15.37
+kwanteng,KT_NearMissed_cleaned.csv,near_miss,False,16.53,near_miss,True,2,True,0.655,1,"9.19,17.18"
+kwanteng,KT_Normal.csv,normal_work,True,,normal,False,0,False,,0,
+pierre,(die) pieere.csv,fall_like,False,8.83,fall_recovery,True,2,True,0.802,1,"8.03,88.53"
+pierre,(near miss) P.csv,near_miss,False,9.12,near_miss,True,1,True,0.419,0,9.54
+pierre,(normal) P motion_data.csv,normal_work,True,,normal,False,1,False,,1,30.53
+ziqian,ziqian_die_data.csv,fall_like,False,64.05,fall_recovery,False,0,False,,0,
+ziqian,ziqian_near_miss_ die.csv,near_miss,False,58.46,near_miss,True,4,True,0.855,3,"6.11,17.61,31.61,57.60"
+ziqian,ziqian_normal_work_data.csv,normal_work,True,,normal,False,0,False,,0,

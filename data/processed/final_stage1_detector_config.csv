@@ -1,0 +1,2 @@
+startup_grace_seconds,cooldown_seconds,reliable_incidents_matched,reliable_incidents_tested,false_negatives,reliable_detection_rate,total_extra_alerts_all_recordings,normal_recordings_with_alert,normal_recordings_tested,total_normal_alerts,uncertain_ziqian_fall_matched,required_votes_out_of_4,threshold_event_peak_acceleration_g,threshold_event_peak_gyroscope_dps,threshold_event_peak_jerk_g_per_second,threshold_event_rotation_integral_deg,scan_step_seconds,match_tolerance_seconds
+5.0,8.0,7.0,7.0,0.0,1.0,12.0,1.0,4.0,1.0,0.0,2,3.28154,641.2865,67.40781,524.51258,0.5,3.0
