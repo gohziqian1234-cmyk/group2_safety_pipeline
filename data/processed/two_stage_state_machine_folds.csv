@@ -1,0 +1,5 @@
+held_out_worker,near_miss_tested,near_miss_event_detected,near_miss_correct_safety_event,near_miss_false_possible_fall,fall_tested,fall_event_detected,fall_correct_possible_fall,normal_positions_tested,normal_false_event_positions,normal_false_fall_positions,normal_recording_false_event,normal_recording_false_fall,posture_threshold,late_gyro_threshold,event_threshold_event_peak_acceleration_g,event_threshold_event_peak_gyroscope_dps,event_threshold_event_peak_jerk_g_per_second,event_threshold_event_rotation_integral_deg
+hong_jean,1,1,1,0,1,1,1,110,0,0,0,0,83.30649,80.10976,3.550146,661.70521,74.529014,533.466132
+kwanteng,1,1,1,0,1,1,0,109,0,0,0,0,83.30649,-162.71014,3.546657,661.70521,74.439032,533.372102
+pierre,1,1,1,0,1,1,0,110,5,1,1,1,309.79877,80.10976,2.981136,543.9383,58.631463,533.466132
+ziqian,1,1,1,0,0,0,0,110,0,0,0,0,83.30649,80.10976,3.550146,661.70521,74.529014,430.367223
