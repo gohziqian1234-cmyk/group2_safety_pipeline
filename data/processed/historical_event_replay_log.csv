@@ -1,0 +1,24 @@
+worker,source_file,recording_type,detected_time_seconds,event_votes,event_peak_acceleration_g,event_peak_gyroscope_dps,event_peak_jerk_g_per_second,event_rotation_integral_deg,expected_event_time_seconds,expected_event_type,reliable_for_score,within_match_tolerance
+hong_jean,(die2) HJ motion_data.csv,fall_like,10.342,2,3.70403,630.9412,66.12879,578.81293,84.16,fall_inactive,True,False
+hong_jean,(die2) HJ motion_data.csv,fall_like,20.842,2,2.38914,752.25057,41.86378,539.92801,84.16,fall_inactive,True,False
+hong_jean,(die2) HJ motion_data.csv,fall_like,37.342,2,1.36172,679.41674,10.61116,600.50954,84.16,fall_inactive,True,False
+hong_jean,(die2) HJ motion_data.csv,fall_like,82.842,2,6.32845,1052.23905,43.35478,322.57351,84.16,fall_inactive,True,True
+hong_jean,(near miss) HJ motion_data.csv,near_miss,0.887,4,4.57713,1144.88478,69.38891,834.35801,53.17,near_miss,True,False
+hong_jean,(near miss) HJ motion_data.csv,near_miss,44.887,2,3.765,676.49523,61.16133,461.27539,53.17,near_miss,True,False
+hong_jean,(near miss) HJ motion_data.csv,near_miss,52.887,2,4.24256,399.01943,95.91929,301.20609,53.17,near_miss,True,True
+hong_jean,(near miss) HJ motion_data.csv,near_miss,65.387,2,1.57731,1650.27791,32.32751,777.52623,53.17,near_miss,True,False
+hong_jean,(near miss) HJ motion_data.csv,near_miss,77.387,2,4.03533,727.09548,54.83643,255.33719,53.17,near_miss,True,False
+hong_jean,(near miss) HJ motion_data.csv,near_miss,89.387,2,3.80217,480.07093,81.19815,408.23896,53.17,near_miss,True,False
+kwanteng,KT_Fall_cleaned.csv,fall_like,15.166,2,3.04519,1129.87079,44.60436,547.05577,16.17,fall_recovery,True,True
+kwanteng,KT_NearMissed_cleaned.csv,near_miss,4.485,2,3.95248,782.70553,66.44599,348.51801,16.53,near_miss,True,False
+kwanteng,KT_NearMissed_cleaned.csv,near_miss,15.485,2,4.01486,1130.86639,44.92667,279.78628,16.53,near_miss,True,True
+pierre,(die) pieere.csv,fall_like,0.828,2,5.3746,770.24161,45.97589,347.7875,8.83,fall_recovery,True,False
+pierre,(die) pieere.csv,fall_like,8.828,3,4.04053,800.13579,39.30358,598.48923,8.83,fall_recovery,True,True
+pierre,(die) pieere.csv,fall_like,88.828,2,1.84243,729.31248,17.1212,537.12269,8.83,fall_recovery,True,False
+pierre,(near miss) P.csv,near_miss,9.339,2,4.04181,576.12238,51.56783,629.50458,9.12,near_miss,True,True
+pierre,(normal) P motion_data.csv,normal_work,1.329,2,1.55161,990.95399,11.39963,554.1853,,normal,False,False
+pierre,(normal) P motion_data.csv,normal_work,30.829,2,3.99668,514.34118,86.04662,415.96526,,normal,False,False
+ziqian,ziqian_near_miss_ die.csv,near_miss,6.405,2,3.27474,767.44663,38.50374,587.35047,58.46,near_miss,True,False
+ziqian,ziqian_near_miss_ die.csv,near_miss,17.905,2,2.90781,750.0551,36.95382,566.17455,58.46,near_miss,True,False
+ziqian,ziqian_near_miss_ die.csv,near_miss,31.405,2,3.71507,554.38202,40.26653,749.22973,58.46,near_miss,True,False
+ziqian,ziqian_near_miss_ die.csv,near_miss,57.405,4,4.87412,969.90084,81.42118,530.31007,58.46,near_miss,True,True
