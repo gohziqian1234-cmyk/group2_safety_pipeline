@@ -1,0 +1,2 @@
+workers_tested,near_miss_workers_detected,fall_workers_detected,total_incidents_detected,total_incidents_tested,mean_incident_detection_rate,mean_normal_position_false_positive_rate,workers_with_normal_recording_false_alarm,mean_normal_recording_false_alarm_rate
+4,3,3,6,8,0.75,0.07273,3,0.75

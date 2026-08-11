@@ -1,0 +1,5 @@
+held_out_worker,feature_subset,normal_quantile,required_votes,training_incident_detection_rate,training_normal_position_false_positive_rate,training_normal_recording_false_alarm_rate,test_incident_detection_rate,test_near_miss_detected,test_fall_detected,test_normal_position_false_positive_rate,test_normal_recording_false_alarm_rate,threshold_event_peak_acceleration_g,threshold_event_peak_gyroscope_dps,threshold_event_peak_jerk_g_per_second,threshold_event_rotation_integral_deg
+hong_jean,event_peak_acceleration_g+event_peak_gyroscope_dps+event_peak_jerk_g_per_second+event_rotation_integral_deg,0.85,4,1.0,0.04559,0.66667,0.5,0,1,0.02727,1.0,2.08262,304.09475,30.84335,307.36013
+kwanteng,event_peak_acceleration_g+event_peak_gyroscope_dps+event_peak_jerk_g_per_second,0.8,3,1.0,0.07879,1.0,1.0,1,1,0.0,0.0,2.03111,295.84866,29.90167,
+pierre,event_peak_acceleration_g+event_peak_jerk_g_per_second,0.925,2,1.0,0.06383,0.66667,1.0,1,1,0.2,1.0,2.31833,,34.44274,
+ziqian,event_peak_gyroscope_dps+event_peak_jerk_g_per_second,0.925,2,1.0,0.02128,0.66667,0.5,1,0,0.06364,1.0,,331.89795,38.14139,
