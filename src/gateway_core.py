@@ -7,7 +7,6 @@ from datetime import datetime, timezone
 # ============================================================
 # GROUP 5 - GATEWAY CORE
 # Reusable message-processing layer between NESSO/BLE and SQLite.
-# The real BLE listener will call process_message() later.
 # ============================================================
 
 PROJECT = Path(__file__).resolve().parent.parent
@@ -15,6 +14,7 @@ DB_PATH = PROJECT / "database" / "safety_pipeline.db"
 
 ALLOWED_MESSAGE_TYPES = {"STATUS", "EVENT"}
 ALLOWED_SAFETY_STATUS = {"SAFE", "SAFETY_EVENT"}
+ALLOWED_DETECTION_SOURCES = {"NESSO_EDGE", "BLE_GATEWAY", "OFFLINE_REPLAY", "SIMULATION"}
 
 
 def utc_now_text():
@@ -104,7 +104,6 @@ def validate_event_time(value):
     if not text:
         raise ValueError("event_time cannot be empty.")
 
-    # Validate ISO-8601 formatting without rewriting the original timestamp.
     try:
         datetime.fromisoformat(text.replace("Z", "+00:00"))
     except ValueError as exc:
@@ -192,9 +191,15 @@ def process_event(connection, message):
     device_id = str(message["device_id"]).strip()
     event_uuid = str(message["event_uuid"]).strip()
     event_time = validate_event_time(message["event_time"])
+    detection_source = str(message.get("detection_source", "NESSO_EDGE")).strip().upper()
 
     if not event_uuid:
         raise ValueError("event_uuid cannot be empty.")
+
+    if detection_source not in ALLOWED_DETECTION_SOURCES:
+        raise ValueError(
+            f"detection_source must be one of {sorted(ALLOWED_DETECTION_SOURCES)}."
+        )
 
     votes = int(message["event_votes"])
     if not 0 <= votes <= 4:
@@ -234,7 +239,7 @@ def process_event(connection, message):
             notes,
             received_at
         )
-        VALUES (?, ?, ?, ?, 'SAFETY_EVENT', 'NESSO_EDGE',
+        VALUES (?, ?, ?, ?, 'SAFETY_EVENT', ?,
                 ?, ?, ?, ?, ?, 0, NULL, ?, ?);
         """,
         (
@@ -242,6 +247,7 @@ def process_event(connection, message):
             worker_id,
             device_id,
             event_time,
+            detection_source,
             votes,
             numeric_fields["acceleration_peak_g"],
             numeric_fields["gyroscope_peak_dps"],
@@ -279,6 +285,7 @@ def process_event(connection, message):
         "worker_id": worker_id,
         "device_id": device_id,
         "event_uuid": event_uuid,
+        "detection_source": detection_source,
         "inserted": inserted,
         "duplicate": not inserted,
     }
