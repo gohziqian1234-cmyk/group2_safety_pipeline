@@ -1,0 +1,9 @@
+worker,source_file,recording_type,suggested_candidate_rank,suggested_event_time_seconds,verification_score,score_gap_to_second,confidence,posture_change_late_deg,event_peak_acceleration_g,event_peak_gyroscope_dps,verification_logic,human_confirmation_required
+hong_jean,(die2) HJ motion_data.csv,fall_like,1,84.16,1.0,0.6921,HIGH,158.72,6.328,1110.8,fall_like: impact + rotation + jerk + sustained posture change,YES
+hong_jean,(near miss) HJ motion_data.csv,near_miss,2,1.57,0.7973,0.4825,HIGH,133.05,4.577,1144.88,near_miss: disturbance + rotation + recovery movement + posture return,YES
+kwanteng,KT_Fall_cleaned.csv,fall_like,1,16.17,0.6,0.1924,MEDIUM,13.99,3.045,1129.87,fall_like: impact + rotation + jerk + sustained posture change,YES
+kwanteng,KT_NearMissed_cleaned.csv,near_miss,1,16.53,0.6072,0.3013,HIGH,9.89,4.015,1130.87,near_miss: disturbance + rotation + recovery movement + posture return,YES
+pierre,(die) pieere.csv,fall_like,2,8.83,0.6704,0.5011,HIGH,83.31,4.04,800.14,fall_like: impact + rotation + jerk + sustained posture change,YES
+pierre,(near miss) P.csv,near_miss,1,9.12,1.0,0.6623,HIGH,25.84,4.042,547.42,near_miss: disturbance + rotation + recovery movement + posture return,YES
+ziqian,ziqian_die_data.csv,fall_like,2,33.57,0.6799,0.0008,LOW,4.81,2.42,387.54,fall_like: impact + rotation + jerk + sustained posture change,YES
+ziqian,ziqian_near_miss_ die.csv,near_miss,2,58.46,0.7811,0.0584,LOW,68.52,4.881,969.9,near_miss: disturbance + rotation + recovery movement + posture return,YES
