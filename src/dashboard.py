@@ -691,7 +691,7 @@ with overview_tab:
                     "detection_source": "Source",
                 }
             ),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
 
@@ -764,7 +764,7 @@ with events_tab:
                     "notes": "Notes",
                 }
             ),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
 
@@ -811,7 +811,7 @@ with devices_tab:
                 "device_id": "Device",
             }
         ),
-        use_container_width=True,
+        width="stretch",
         hide_index=True,
     )
 
@@ -913,7 +913,7 @@ with config_tab:
         if threshold_rows:
             st.dataframe(
                 pd.DataFrame(threshold_rows),
-                use_container_width=True,
+                width="stretch",
                 hide_index=True,
             )
 
