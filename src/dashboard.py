@@ -3,6 +3,7 @@ import sqlite3
 import time
 from datetime import datetime, timezone, timedelta
 
+import altair as alt
 import pandas as pd
 import streamlit as st
 
@@ -698,7 +699,8 @@ with overview_tab:
                 <div class="section-title">Live signal</div>
                 <div class="section-help">
                     Acceleration magnitude in g, one line per connected worker,
-                    last 30 seconds. Updates once a second while the BLE
+                    last 30 seconds. The dashed red line is the detector's
+                    acceleration threshold. Updates once a second while the BLE
                     gateway is running.
                 </div>
             </div>
@@ -715,25 +717,109 @@ with overview_tab:
             )
             return
 
-        # Put both workers on a shared time grid before pivoting.
+        # Put both workers on a shared time grid before plotting.
         #
-        # Every sample carries its own microsecond timestamp, so pivoting on
-        # the raw value gives one row per sample with the other worker's
-        # column empty - and a line chart skips gaps, so nothing is drawn.
-        # Binning into fixed 200 ms buckets lines the workers up on the same
-        # rows. The bucket takes the maximum rather than the mean, so a short
-        # impact peak survives instead of being averaged away.
+        # Every sample carries its own microsecond timestamp, so plotting the
+        # raw values leaves each worker's series full of gaps where only the
+        # other worker has a point. Binning into fixed 200 ms buckets lines
+        # them up. The bucket takes the maximum rather than the mean, so a
+        # short impact peak survives instead of being averaged away.
         samples["time"] = pd.to_datetime(
             (samples["sample_epoch"] // 0.2) * 0.2, unit="s"
         )
-        accel = samples.pivot_table(
-            index="time",
-            columns="worker_name",
-            values="acceleration_magnitude_g",
-            aggfunc="max",
+        binned = (
+            samples.groupby(["time", "worker_name"], as_index=False)
+                   .agg(
+                       accel=("acceleration_magnitude_g", "max"),
+                       gyro=("gyroscope_magnitude_dps", "max"),
+                   )
         )
 
-        st.line_chart(accel, height=260)
+        # The threshold comes from the active SQLite config, so the line on
+        # the chart can never disagree with what the detector is using.
+        accel_threshold = None
+        if not detector.empty:
+            accel_threshold = safe_float(
+                detector.iloc[0],
+                ["acceleration_threshold_g", "accel_threshold_g"],
+            )
+
+        top = max(float(binned["accel"].max()), accel_threshold or 0.0)
+
+        lines = (
+            alt.Chart(binned)
+            .mark_line(strokeWidth=2)
+            .encode(
+                x=alt.X("time:T", title=None),
+                y=alt.Y(
+                    "accel:Q",
+                    title="|accel| (g)",
+                    scale=alt.Scale(domain=[0, top * 1.15]),
+                ),
+                color=alt.Color("worker_name:N", title="Worker"),
+                tooltip=[
+                    alt.Tooltip("worker_name:N", title="Worker"),
+                    alt.Tooltip("accel:Q", title="|accel| (g)", format=".2f"),
+                    alt.Tooltip("gyro:Q", title="|gyro| (dps)", format=".0f"),
+                    alt.Tooltip("time:T", title="Time"),
+                ],
+            )
+        )
+
+        chart = lines
+        if accel_threshold:
+            rule = (
+                alt.Chart(pd.DataFrame({"y": [accel_threshold]}))
+                .mark_rule(color="#d92d20", strokeDash=[6, 4], strokeWidth=2)
+                .encode(y="y:Q")
+            )
+            label = (
+                alt.Chart(
+                    pd.DataFrame({
+                        "y": [accel_threshold],
+                        "text": [f"threshold {accel_threshold:.2f} g"],
+                    })
+                )
+                .mark_text(
+                    align="left", baseline="bottom", dx=6, dy=-3,
+                    color="#d92d20", fontSize=11,
+                )
+                .encode(x=alt.value(6), y="y:Q", text="text:N")
+            )
+            chart = lines + rule + label
+
+        st.altair_chart(chart.properties(height=260), width="stretch")
+
+        # ------------------------------------------------------------------
+        # THRESHOLD WARNING
+        #
+        # Deliberately worded as "crossed the acceleration threshold" and not
+        # as a fall. Acceleration is only one of the detector's four signals
+        # and two must agree, so a crossing on its own is not an incident -
+        # calling it one here would contradict the event log below.
+        # ------------------------------------------------------------------
+        if accel_threshold:
+            # Five seconds, not one: an impact lasts about 100 ms, and a
+            # warning that vanished that fast would be missed. Five is long
+            # enough to notice while still honestly meaning "just now".
+            recent_cutoff = binned["time"].max() - pd.Timedelta(seconds=5)
+            recent = binned.loc[binned["time"] >= recent_cutoff]
+            over = (
+                recent.loc[recent["accel"] >= accel_threshold]
+                      .groupby("worker_name")["accel"]
+                      .max()
+                      .sort_values(ascending=False)
+            )
+
+            if not over.empty:
+                who = ", ".join(
+                    f"{name} ({value:.2f} g)" for name, value in over.items()
+                )
+                st.warning(
+                    f"Above the acceleration threshold in the last 5 s: {who}. "
+                    "A confirmed incident still needs 2 of the 4 signals to "
+                    "agree - check the event log below."
+                )
 
         latest = (
             samples.sort_values("sample_epoch")
