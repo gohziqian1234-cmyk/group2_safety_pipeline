@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import math
+import sys
 import time
 import uuid
 from collections import deque
@@ -16,11 +17,26 @@ from gateway_core import connect_database, process_message
 # EG2A17 GROUP 5 - FINAL LIVE BLE GATEWAY
 # NESSO 25 Hz raw IMU -> Python rule detector -> SQLite
 # Detection runs HERE in Python. This is NOT NESSO edge detection.
+#
+# Runs one or more NESSO boards at the same time. Each board gets its own
+# BLE session, its own detector instance and its own row in device_status,
+# so one worker's incident or dropout never affects another's.
 # ============================================================
 
-BLE_NAME = "ziqian"
-WORKER_ID = "ZQ"
-DEVICE_ID = "ZQ_N1"
+# ------------------------------------------------------------
+# THE BOARDS
+#
+# ble_name   must match BLE_NAME in that board's Arduino sketch
+# worker_id  must match an active row in the SQLite workers table
+# device_id  must match that same row
+#
+# Add a board by adding a line here and flashing its sketch. Nothing else
+# in this file, in gateway_core.py or in the dashboard needs changing.
+# ------------------------------------------------------------
+WORKERS = [
+    {"ble_name": "ziqian", "worker_id": "ZQ", "device_id": "ZQ_N1"},
+    {"ble_name": "hongjean", "worker_id": "HJ", "device_id": "HJ_N1"},
+]
 
 SERVICE_UUID = "bdc766fc-7eee-417f-bbe0-2e71a8a2bf70"
 COMBINED_IMU_UUID = "f509416c-3c4b-401e-a768-b25a9e621a91"
@@ -46,12 +62,31 @@ APPROVED_CONFIG = {
 }
 
 
+# ============================================================
+# SHARED RESOURCES
+#
+# Two things are shared between the per-worker tasks and both need guarding.
+# ============================================================
+
+# Only one BLE scan may run at a time. Windows and BlueZ both dislike
+# concurrent discovery, and two workers searching at once produces missed
+# devices rather than a clean error.
+SCAN_LOCK = asyncio.Lock()
+
+# One SQLite connection is shared by every worker. The tasks all run on the
+# same event loop, so writes cannot truly overlap - but this lock makes that
+# safety explicit rather than accidental, and keeps it true if an await is
+# ever added between an execute and its commit.
+DB_LOCK = asyncio.Lock()
+
+
 class LiveStage1Detector:
     """Online implementation of the validated 25 Hz Stage-1 detector."""
 
-    def __init__(self, connection, config):
+    def __init__(self, connection, config, worker):
         self.connection = connection
         self.config = config
+        self.worker = worker
         self.samples = deque()
         self.sample_index = 0
         self.previous_acceleration_magnitude = None
@@ -131,17 +166,17 @@ class LiveStage1Detector:
         )
         return votes
 
-    def _store_event(self, center_seconds, votes, features):
+    def _build_event(self, center_seconds, votes, features):
         if self.first_sample_utc is None:
             event_time = datetime.now(timezone.utc)
         else:
             event_time = self.first_sample_utc + timedelta(seconds=center_seconds)
 
-        message = {
+        return {
             "message_type": "EVENT",
             "event_uuid": str(uuid.uuid4()),
-            "worker_id": WORKER_ID,
-            "device_id": DEVICE_ID,
+            "worker_id": self.worker["worker_id"],
+            "device_id": self.worker["device_id"],
             "event_time": event_time.isoformat(timespec="milliseconds"),
             "detection_source": "BLE_GATEWAY",
             "event_votes": int(votes),
@@ -152,11 +187,15 @@ class LiveStage1Detector:
             ),
         }
 
-        result = process_message(self.connection, message)
-        self.connection.commit()
-        return result
-
     def ingest(self, values):
+        """
+        Feed in one BLE sample.
+
+        Returns a list of (event_message, votes, features) for any incident
+        confirmed by this sample. Storing is left to the caller, because
+        writing to SQLite has to happen under DB_LOCK and this method is
+        deliberately synchronous.
+        """
         xg, yg, zg, xdeg, ydeg, zdeg = values
 
         elapsed = self.sample_index * DT
@@ -213,7 +252,6 @@ class LiveStage1Detector:
             if votes < int(self.config["required_votes_out_of_4"]):
                 continue
 
-            result = self._store_event(center, votes, features)
             self.cooldown_until_center = center + float(
                 self.config["cooldown_seconds"]
             )
@@ -221,7 +259,9 @@ class LiveStage1Detector:
                 self.config["cooldown_seconds"]
             )
 
-            detections.append((result, votes, features))
+            detections.append(
+                (self._build_event(center, votes, features), votes, features)
+            )
 
         return detections
 
@@ -296,71 +336,92 @@ def load_and_verify_detector_config(connection):
     return config
 
 
-def register_live_ble_name(connection):
+def register_live_ble_name(connection, worker):
     cursor = connection.execute(
         """
         UPDATE workers
         SET ble_name = ?
         WHERE worker_id = ? AND device_id = ? AND active = 1;
         """,
-        (BLE_NAME, WORKER_ID, DEVICE_ID),
+        (worker["ble_name"], worker["worker_id"], worker["device_id"]),
     )
     if cursor.rowcount != 1:
         raise RuntimeError(
-            f"Expected active worker/device {WORKER_ID}/{DEVICE_ID} in SQLite."
+            f"Expected active worker/device "
+            f"{worker['worker_id']}/{worker['device_id']} in SQLite. "
+            "Check the WORKERS list against the workers table, and run "
+            "src\\17_init_database.py if the database has not been seeded."
         )
     connection.commit()
 
 
-def write_status(connection, safety_status):
-    result = process_message(
-        connection,
-        {
-            "message_type": "STATUS",
-            "worker_id": WORKER_ID,
-            "device_id": DEVICE_ID,
-            "safety_status": safety_status,
-            "queued_events": 0,
-            "battery_percent": None,
-        },
-    )
-    connection.commit()
+async def write_status(connection, worker, safety_status):
+    async with DB_LOCK:
+        result = process_message(
+            connection,
+            {
+                "message_type": "STATUS",
+                "worker_id": worker["worker_id"],
+                "device_id": worker["device_id"],
+                "safety_status": safety_status,
+                "queued_events": 0,
+                "battery_percent": None,
+            },
+        )
+        connection.commit()
     return result
 
 
-def mark_disconnected(connection):
+async def store_event(connection, event_message):
+    async with DB_LOCK:
+        result = process_message(connection, event_message)
+        connection.commit()
+    return result
+
+
+async def mark_disconnected(connection, worker):
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    connection.execute(
-        """
-        UPDATE device_status
-        SET
-            connection_status = 'DISCONNECTED',
-            safety_status = 'DISCONNECTED',
-            updated_at = ?
-        WHERE worker_id = ? AND device_id = ?;
-        """,
-        (now, WORKER_ID, DEVICE_ID),
-    )
-    connection.commit()
+    async with DB_LOCK:
+        connection.execute(
+            """
+            UPDATE device_status
+            SET
+                connection_status = 'DISCONNECTED',
+                safety_status = 'DISCONNECTED',
+                updated_at = ?
+            WHERE worker_id = ? AND device_id = ?;
+            """,
+            (now, worker["worker_id"], worker["device_id"]),
+        )
+        connection.commit()
 
 
-async def find_nesso():
-    print(f"Scanning for BLE device name: {BLE_NAME!r} ...")
+async def find_nesso(worker):
+    """
+    Scan for one board.
+
+    Held under SCAN_LOCK so only one worker scans at a time - concurrent BLE
+    discovery is unreliable on both Windows and Linux.
+    """
+    ble_name = worker["ble_name"]
 
     def matches(device, advertisement_data):
         names = {
             str(device.name or "").strip().lower(),
             str(advertisement_data.local_name or "").strip().lower(),
         }
-        return BLE_NAME.lower() in names
+        return ble_name.lower() in names
 
-    return await BleakScanner.find_device_by_filter(
-        matches,
-        timeout=SCAN_TIMEOUT_SECONDS,
-    )
+    async with SCAN_LOCK:
+        print(f"[{ble_name}] scanning...")
+        return await BleakScanner.find_device_by_filter(
+            matches,
+            timeout=SCAN_TIMEOUT_SECONDS,
+        )
 
 
-async def run_connected_session(device, connection, config):
+async def run_connected_session(device, connection, config, worker):
+    ble_name = worker["ble_name"]
     packet_queue = asyncio.Queue(maxsize=250)
     disconnected = asyncio.Event()
 
@@ -382,21 +443,16 @@ async def run_connected_session(device, connection, config):
             except asyncio.QueueFull:
                 pass
 
-    detector = LiveStage1Detector(connection, config)
+    detector = LiveStage1Detector(connection, config, worker)
 
     async with BleakClient(device, disconnected_callback=on_disconnect) as client:
         await client.start_notify(COMBINED_IMU_UUID, on_notification)
-        write_status(connection, "SAFE")
+        await write_status(connection, worker, "SAFE")
 
-        print("=" * 76)
-        print(f"CONNECTED / SAFE | BLE={BLE_NAME} | worker={WORKER_ID} | device={DEVICE_ID}")
-        print(f"Service UUID: {SERVICE_UUID}")
-        print(f"IMU UUID:     {COMBINED_IMU_UUID}")
-        print("Payload:      Xg,Yg,Zg,Xdeg,Ydeg,Zdeg")
-        print("Sampling:     25 Hz")
-        print("Detection:    Python BLE gateway (BLE_GATEWAY), not NESSO edge")
-        print("Press Ctrl+C to stop.")
-        print("=" * 76)
+        print(
+            f"[{ble_name}] CONNECTED / SAFE | "
+            f"worker={worker['worker_id']} | device={worker['device_id']}"
+        )
 
         last_status = 0.0
         last_drop_warning = 0.0
@@ -409,7 +465,8 @@ async def run_connected_session(device, connection, config):
 
             if packet_queue.qsize() > 100 and time.monotonic() - last_drop_warning > 5.0:
                 print(
-                    f"WARNING: BLE processing queue is high ({packet_queue.qsize()} packets)."
+                    f"[{ble_name}] WARNING: BLE processing queue is high "
+                    f"({packet_queue.qsize()} packets)."
                 )
                 last_drop_warning = time.monotonic()
 
@@ -417,12 +474,15 @@ async def run_connected_session(device, connection, config):
                 values = parse_ble_payload(raw_data)
                 detections = detector.ingest(values)
             except ValueError as exc:
-                print(f"IGNORED BAD BLE PAYLOAD: {exc}")
+                print(f"[{ble_name}] IGNORED BAD BLE PAYLOAD: {exc}")
                 continue
 
-            for result, votes, features in detections:
+            for event_message, votes, features in detections:
+                result = await store_event(connection, event_message)
+
                 print()
-                print("*** SAFETY_EVENT STORED ***")
+                print(f"*** SAFETY_EVENT STORED - {ble_name} "
+                      f"({worker['worker_id']}) ***")
                 print(f"event_uuid: {result['event_uuid']}")
                 print(f"votes:      {votes}/4")
                 print(
@@ -438,7 +498,7 @@ async def run_connected_session(device, connection, config):
             now = time.monotonic()
             if now - last_status >= STATUS_INTERVAL_SECONDS:
                 safety_status = "SAFETY_EVENT" if detector.alert_active() else "SAFE"
-                write_status(connection, safety_status)
+                await write_status(connection, worker, safety_status)
                 last_status = now
 
         try:
@@ -447,7 +507,70 @@ async def run_connected_session(device, connection, config):
             pass
 
 
-def print_config(config):
+async def worker_session(connection, config, worker):
+    """
+    Keep one board connected for as long as the gateway runs.
+
+    Each worker runs one of these concurrently. Anything that goes wrong here
+    is contained: a board that will not connect retries on its own without
+    stopping the others.
+    """
+    ble_name = worker["ble_name"]
+
+    while True:
+        device = await find_nesso(worker)
+
+        if device is None:
+            print(
+                f"[{ble_name}] not found. Check Bluetooth is on and the board "
+                f"is powered; retrying."
+            )
+            await asyncio.sleep(RECONNECT_DELAY_SECONDS)
+            continue
+
+        print(f"[{ble_name}] found at {device.address}. Connecting...")
+
+        try:
+            await run_connected_session(device, connection, config, worker)
+        except Exception as exc:
+            print(f"[{ble_name}] session ended: {type(exc).__name__}: {exc}")
+        finally:
+            await mark_disconnected(connection, worker)
+
+        print(f"[{ble_name}] reconnecting in {RECONNECT_DELAY_SECONDS:.0f} s...")
+        await asyncio.sleep(RECONNECT_DELAY_SECONDS)
+
+
+def select_workers(argv):
+    """
+    Choose which boards to run.
+
+    With no arguments every board in WORKERS runs. Naming boards on the
+    command line runs only those, which is what you want when only one board
+    is on the bench - otherwise the gateway spends its time scanning for a
+    board that is not switched on.
+
+        py src\\21_live_ble_gateway.py                  both boards
+        py src\\21_live_ble_gateway.py ziqian           ziqian only
+    """
+    if not argv:
+        return list(WORKERS)
+
+    wanted = [name.strip().lower() for name in argv]
+    by_name = {worker["ble_name"].lower(): worker for worker in WORKERS}
+
+    unknown = [name for name in wanted if name not in by_name]
+    if unknown:
+        known = ", ".join(sorted(by_name))
+        raise SystemExit(
+            f"Unknown board name(s): {', '.join(unknown)}.\n"
+            f"Configured boards are: {known}"
+        )
+
+    return [by_name[name] for name in wanted]
+
+
+def print_config(config, workers):
     print("Approved active detector config:")
     print(f"  Votes:        {int(config['required_votes_out_of_4'])}/4")
     print(f"  Acceleration: >= {float(config['acceleration_threshold_g']):.5f} g")
@@ -457,43 +580,54 @@ def print_config(config):
     print(f"  Startup:      {float(config['startup_grace_seconds']):.1f} s")
     print(f"  Cooldown:     {float(config['cooldown_seconds']):.1f} s")
     print()
+    print(f"Boards ({len(workers)}):")
+    for worker in workers:
+        print(
+            f"  {worker['ble_name']:10s} -> "
+            f"{worker['worker_id']} / {worker['device_id']}"
+        )
+    print()
+    print(f"Service UUID: {SERVICE_UUID}")
+    print(f"IMU UUID:     {COMBINED_IMU_UUID}")
+    print("Payload:      Xg,Yg,Zg,Xdeg,Ydeg,Zdeg")
+    print("Sampling:     25 Hz")
+    print("Detection:    Python BLE gateway (BLE_GATEWAY), not NESSO edge")
+    print("Press Ctrl+C to stop.")
+    print("=" * 76)
 
 
 async def main():
+    workers = select_workers(sys.argv[1:])
     connection = connect_database()
 
     try:
         config = load_and_verify_detector_config(connection)
-        register_live_ble_name(connection)
-        print_config(config)
 
-        while True:
-            device = await find_nesso()
-            if device is None:
-                print(
-                    f"NESSO {BLE_NAME!r} not found. Make sure Windows Bluetooth is on "
-                    "and the Arduino sketch is powered, then scanning will retry."
-                )
-                await asyncio.sleep(RECONNECT_DELAY_SECONDS)
-                continue
+        # Fail before any BLE work if a board is not registered in SQLite -
+        # a typo in WORKERS is much easier to understand here than as a
+        # foreign-key error at the moment of the first detection.
+        for worker in workers:
+            register_live_ble_name(connection, worker)
 
-            print(f"Found {device.name or BLE_NAME} at {device.address}. Connecting...")
+        print_config(config, workers)
 
-            try:
-                await run_connected_session(device, connection, config)
-            except Exception as exc:
-                print(f"BLE session ended: {type(exc).__name__}: {exc}")
-            finally:
-                mark_disconnected(connection)
-
-            print(f"Reconnecting in {RECONNECT_DELAY_SECONDS:.0f} seconds...")
-            await asyncio.sleep(RECONNECT_DELAY_SECONDS)
+        # One task per board. return_exceptions keeps a crash in one session
+        # from silently cancelling the other worker's task.
+        results = await asyncio.gather(
+            *(worker_session(connection, config, worker) for worker in workers),
+            return_exceptions=True,
+        )
+        for worker, result in zip(workers, results):
+            if isinstance(result, Exception):
+                print(f"[{worker['ble_name']}] stopped: {result!r}")
 
     finally:
-        try:
-            mark_disconnected(connection)
-        finally:
-            connection.close()
+        for worker in workers:
+            try:
+                await mark_disconnected(connection, worker)
+            except Exception:
+                pass
+        connection.close()
 
 
 if __name__ == "__main__":

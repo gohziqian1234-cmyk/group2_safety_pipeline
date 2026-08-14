@@ -17,12 +17,41 @@ NESSO 25 Hz Arduino
 
 ## Final hardware / BLE settings
 
-- BLE name: `ziqian`
+Two boards run at the same time. Every setting below is identical on both -
+only the BLE name differs, because that is what tells the gateway which
+worker a board belongs to.
+
+| BLE name | Worker | Device | Arduino sketch |
+|----------|--------|--------|----------------|
+| `ziqian` | `ZQ` (Ziqian) | `ZQ_N1` | `NESSO_ziqian_25Hz.ino` |
+| `hongjean` | `HJ` (Hong Jean) | `HJ_N1` | `NESSO_hongjean_25Hz.ino` |
+
 - Sampling rate: **25 Hz**
 - Service UUID: `bdc766fc-7eee-417f-bbe0-2e71a8a2bf70`
 - Combined accelerometer + gyroscope UUID: `f509416c-3c4b-401e-a768-b25a9e621a91`
 - BLE payload: `Xg,Yg,Zg,Xdeg,Ydeg,Zdeg`
-- Arduino sketch: `NESSO_ziqian_25Hz.ino`
+
+**Every board needs its own BLE name.** Two boards advertising the same name
+would be matched to the same worker, and their two data streams would be
+interleaved into one detector - which produces meaningless features rather
+than an obvious error.
+
+### Adding a third board
+
+Add a line to `WORKERS` at the top of `src/21_live_ble_gateway.py`:
+
+```python
+WORKERS = [
+    {"ble_name": "ziqian",   "worker_id": "ZQ", "device_id": "ZQ_N1"},
+    {"ble_name": "hongjean", "worker_id": "HJ", "device_id": "HJ_N1"},
+    {"ble_name": "kwanteng", "worker_id": "KT", "device_id": "KT_N1"},
+]
+```
+
+then copy a sketch and change its `BLE_NAME`. `worker_id` and `device_id`
+must match an active row in the SQLite `workers` table - `17_init_database.py`
+already seeds ZQ, HJ, KT and PI. Nothing else needs changing: `gateway_core.py`
+and the Streamlit dashboard are already per-worker.
 
 ## Validated detector configuration
 
@@ -51,12 +80,22 @@ py src\17_init_database.py
 
 ## Exact lesson run sequence
 
-1. **Upload `NESSO_ziqian_25Hz.ino`** to the NESSO N1.
-2. **Turn on Bluetooth** on the Windows laptop and power the NESSO.
+1. **Upload the sketches.** `NESSO_ziqian_25Hz.ino` to Ziqian's board and
+   `NESSO_hongjean_25Hz.ino` to Hong Jean's. The two files differ only in
+   `BLE_NAME`.
+2. **Turn on Bluetooth** on the Windows laptop and power both NESSO boards.
 3. From the repository root, run the real BLE gateway:
 
    ```bat
    py src\21_live_ble_gateway.py
+   ```
+
+   That connects to both boards. To run only one - useful when the other is
+   not on the bench, since otherwise the gateway spends its time scanning for
+   a board that is switched off:
+
+   ```bat
+   py src\21_live_ble_gateway.py ziqian
    ```
 
 4. In a second terminal, run the Streamlit dashboard:
@@ -67,7 +106,10 @@ py src\17_init_database.py
 
    Alternatively, after dependencies are installed, `run_live_system.bat` opens both programs.
 
-5. Confirm the gateway/dashboard shows **CONNECTED / SAFE** for Ziqian.
+5. Confirm the gateway prints `CONNECTED / SAFE` for **both** `[ziqian]` and
+   `[hongjean]`, and that the dashboard shows both workers connected. Every
+   gateway line is prefixed with the board name so the two are easy to tell
+   apart.
 6. Perform only a **safe, controlled movement** appropriate for the lesson demonstration.
 7. When the validated 2-of-4 rule is met, confirm a **SAFETY_EVENT** is written to SQLite and appears on the Streamlit dashboard.
 8. The event source should be recorded as **`BLE_GATEWAY`**, because detection runs in Python for this lesson-ready version.
@@ -84,7 +126,8 @@ py src\17_init_database.py
 - `src/gateway_core.py` - reusable status/event persistence layer
 - `src/21_live_ble_gateway.py` - real BLE listener + Python Stage-1 detector
 - `src/dashboard.py` - Streamlit safety dashboard
-- `NESSO_ziqian_25Hz.ino` - final NESSO 25 Hz raw-IMU BLE firmware
+- `NESSO_ziqian_25Hz.ino` - NESSO 25 Hz raw-IMU BLE firmware (Ziqian)
+- `NESSO_hongjean_25Hz.ino` - the same firmware with `BLE_NAME "hongjean"`
 - `requirements_live.txt` - live Python dependencies
 - `run_live_system.bat` - Windows lesson launcher
 - `database/safety_pipeline.db` - local project database
@@ -98,3 +141,29 @@ py src\17_init_database.py
 ## Live-system notes
 
 The Arduino sends raw accelerometer and gyroscope values only. The Python gateway reconstructs the approved 25 Hz detector features, applies the fixed 2-of-4 vote rule, uses the 5-second startup grace and 8-second cooldown, stores real events as `BLE_GATEWAY`, and updates the device status used by the Streamlit dashboard.
+
+### How the two boards stay independent
+
+Each board gets its own BLE session, its own `LiveStage1Detector` instance and
+its own row in `device_status`. One worker's incident, cooldown or dropout has
+no effect on the other. Two details make that safe:
+
+- **Scanning is serialised.** Only one BLE scan runs at a time, because
+  concurrent discovery is unreliable on both Windows and Linux - it produces
+  missed devices rather than a clean error.
+- **Database writes are serialised.** The tasks share one SQLite connection.
+  They all run on the same event loop so writes cannot truly overlap, but the
+  lock makes that guarantee explicit rather than accidental.
+
+### Known detector behaviour on the recorded data
+
+Recorded in `data/processed/final_stage1_detector_config.csv` and
+`fixed_event_rule_final.csv`, and worth stating plainly before a
+demonstration:
+
+- 7 of 7 reliable incidents detected, 0 false negatives.
+- The ziqian fall recording is **not** detected. It is classified as an
+  uncertain incident rather than a reliable one, so it does not count against
+  the detection rate - but it does mean this detector has a known miss.
+- 1 of 4 normal-work recordings raises an alert; the per-window false
+  positive rate is 0.46%.
