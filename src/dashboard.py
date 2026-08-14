@@ -335,7 +335,8 @@ def load_live_samples(seconds=LIVE_CHART_SECONDS):
                 COALESCE(w.worker_name, ls.worker_id) AS worker_name,
                 ls.sample_epoch,
                 ls.acceleration_magnitude_g,
-                ls.gyroscope_magnitude_dps
+                ls.gyroscope_magnitude_dps,
+                ls.jerk_g_per_second
             FROM live_samples ls
             LEFT JOIN workers w ON w.worker_id = ls.worker_id
             WHERE ls.sample_epoch >= ?
@@ -346,6 +347,55 @@ def load_live_samples(seconds=LIVE_CHART_SECONDS):
         )
     finally:
         con.close()
+
+
+def detector_thresholds(detector_row):
+    """
+    Every threshold the detector votes on, read from the active SQLite
+    config. One place, so the charts, the warning and the vote panel can
+    never disagree with each other or with the running gateway.
+    """
+    if detector_row is None:
+        return {}
+
+    return {
+        "acceleration_peak_g": {
+            "label": "Acceleration",
+            "unit": "g",
+            "value": safe_float(
+                detector_row,
+                ["acceleration_threshold_g", "accel_threshold_g"],
+            ),
+            "format": "{:.2f}",
+        },
+        "gyroscope_peak_dps": {
+            "label": "Gyroscope",
+            "unit": "dps",
+            "value": safe_float(
+                detector_row,
+                ["gyroscope_threshold_dps", "gyro_threshold_dps"],
+            ),
+            "format": "{:.0f}",
+        },
+        "jerk_peak_g_per_second": {
+            "label": "Jerk",
+            "unit": "g/s",
+            "value": safe_float(
+                detector_row,
+                ["jerk_threshold_g_per_second", "jerk_threshold_gps"],
+            ),
+            "format": "{:.1f}",
+        },
+        "rotation_integral_deg": {
+            "label": "Rotation",
+            "unit": "deg",
+            "value": safe_float(
+                detector_row,
+                ["rotation_threshold_deg", "rotation_threshold_degrees"],
+            ),
+            "format": "{:.0f}",
+        },
+    }
 
 
 def load_data():
@@ -698,10 +748,10 @@ with overview_tab:
             <div class="section-card">
                 <div class="section-title">Live signal</div>
                 <div class="section-help">
-                    Acceleration magnitude in g, one line per connected worker,
-                    last 30 seconds. The dashed red line is the detector's
-                    acceleration threshold. Updates once a second while the BLE
-                    gateway is running.
+                    Raw signal from each connected worker over the last 30
+                    seconds. Dashed red lines are the detector's thresholds,
+                    read from the active SQLite configuration. Updates once a
+                    second while the BLE gateway is running.
                 </div>
             </div>
             """,
@@ -713,17 +763,22 @@ with overview_tab:
         if samples.empty:
             st.info(
                 "No live signal yet. Start the BLE gateway "
-                "(py src\\21_live_ble_gateway.py) and the chart will fill in."
+                "(py src\\21_live_ble_gateway.py) and the charts will fill in."
             )
             return
 
-        # Put both workers on a shared time grid before plotting.
+        thresholds = detector_thresholds(
+            None if detector.empty else detector.iloc[0]
+        )
+
+        # Put every worker on a shared time grid before plotting.
         #
-        # Every sample carries its own microsecond timestamp, so plotting the
-        # raw values leaves each worker's series full of gaps where only the
-        # other worker has a point. Binning into fixed 200 ms buckets lines
-        # them up. The bucket takes the maximum rather than the mean, so a
-        # short impact peak survives instead of being averaged away.
+        # Each sample carries its own microsecond timestamp, so plotting raw
+        # values leaves each worker's series full of gaps where only another
+        # worker has a point, and a line chart skips gaps. Binning into fixed
+        # 200 ms buckets lines them up. Buckets take the maximum rather than
+        # the mean so a short impact peak survives instead of being averaged
+        # away.
         samples["time"] = pd.to_datetime(
             (samples["sample_epoch"] // 0.2) * 0.2, unit="s"
         )
@@ -732,52 +787,47 @@ with overview_tab:
                    .agg(
                        accel=("acceleration_magnitude_g", "max"),
                        gyro=("gyroscope_magnitude_dps", "max"),
+                       jerk=("jerk_g_per_second", "max"),
                    )
         )
 
-        # The threshold comes from the active SQLite config, so the line on
-        # the chart can never disagree with what the detector is using.
-        accel_threshold = None
-        if not detector.empty:
-            accel_threshold = safe_float(
-                detector.iloc[0],
-                ["acceleration_threshold_g", "accel_threshold_g"],
+        def signal_chart(column, title, unit, threshold):
+            top = float(binned[column].max())
+            if threshold:
+                top = max(top, threshold)
+
+            lines = (
+                alt.Chart(binned)
+                .mark_line(strokeWidth=2)
+                .encode(
+                    x=alt.X("time:T", title=None),
+                    y=alt.Y(
+                        f"{column}:Q",
+                        title=f"{title} ({unit})",
+                        scale=alt.Scale(domain=[0, top * 1.15]),
+                    ),
+                    color=alt.Color("worker_name:N", title="Worker"),
+                    tooltip=[
+                        alt.Tooltip("worker_name:N", title="Worker"),
+                        alt.Tooltip(f"{column}:Q", title=title, format=".2f"),
+                        alt.Tooltip("time:T", title="Time"),
+                    ],
+                )
             )
 
-        top = max(float(binned["accel"].max()), accel_threshold or 0.0)
+            if not threshold:
+                return lines.properties(height=220)
 
-        lines = (
-            alt.Chart(binned)
-            .mark_line(strokeWidth=2)
-            .encode(
-                x=alt.X("time:T", title=None),
-                y=alt.Y(
-                    "accel:Q",
-                    title="|accel| (g)",
-                    scale=alt.Scale(domain=[0, top * 1.15]),
-                ),
-                color=alt.Color("worker_name:N", title="Worker"),
-                tooltip=[
-                    alt.Tooltip("worker_name:N", title="Worker"),
-                    alt.Tooltip("accel:Q", title="|accel| (g)", format=".2f"),
-                    alt.Tooltip("gyro:Q", title="|gyro| (dps)", format=".0f"),
-                    alt.Tooltip("time:T", title="Time"),
-                ],
-            )
-        )
-
-        chart = lines
-        if accel_threshold:
             rule = (
-                alt.Chart(pd.DataFrame({"y": [accel_threshold]}))
+                alt.Chart(pd.DataFrame({"y": [threshold]}))
                 .mark_rule(color="#d92d20", strokeDash=[6, 4], strokeWidth=2)
                 .encode(y="y:Q")
             )
-            label = (
+            caption = (
                 alt.Chart(
                     pd.DataFrame({
-                        "y": [accel_threshold],
-                        "text": [f"threshold {accel_threshold:.2f} g"],
+                        "y": [threshold],
+                        "text": [f"threshold {threshold:,.2f} {unit}"],
                     })
                 )
                 .mark_text(
@@ -786,54 +836,119 @@ with overview_tab:
                 )
                 .encode(x=alt.value(6), y="y:Q", text="text:N")
             )
-            chart = lines + rule + label
+            return (lines + rule + caption).properties(height=220)
 
-        st.altair_chart(chart.properties(height=260), width="stretch")
-
-        # ------------------------------------------------------------------
-        # THRESHOLD WARNING
-        #
-        # Deliberately worded as "crossed the acceleration threshold" and not
-        # as a fall. Acceleration is only one of the detector's four signals
-        # and two must agree, so a crossing on its own is not an incident -
-        # calling it one here would contradict the event log below.
-        # ------------------------------------------------------------------
-        if accel_threshold:
-            # Five seconds, not one: an impact lasts about 100 ms, and a
-            # warning that vanished that fast would be missed. Five is long
-            # enough to notice while still honestly meaning "just now".
-            recent_cutoff = binned["time"].max() - pd.Timedelta(seconds=5)
-            recent = binned.loc[binned["time"] >= recent_cutoff]
-            over = (
-                recent.loc[recent["accel"] >= accel_threshold]
-                      .groupby("worker_name")["accel"]
-                      .max()
-                      .sort_values(ascending=False)
+        accel_col, gyro_col = st.columns(2)
+        with accel_col:
+            st.altair_chart(
+                signal_chart(
+                    "accel", "Acceleration", "g",
+                    thresholds.get("acceleration_peak_g", {}).get("value"),
+                ),
+                width="stretch",
+            )
+        with gyro_col:
+            st.altair_chart(
+                signal_chart(
+                    "gyro", "Gyroscope", "dps",
+                    thresholds.get("gyroscope_peak_dps", {}).get("value"),
+                ),
+                width="stretch",
             )
 
-            if not over.empty:
+        # ------------------------------------------------------------------
+        # LIVE SIGNAL vs THRESHOLD, PER WORKER
+        #
+        # The detector votes on four signals and needs two to agree. This
+        # panel recomputes all four the same way over the most recent two
+        # seconds, so you can see WHY an event did or did not fire rather
+        # than only that it did.
+        #
+        # It is indicative, not authoritative. The detector evaluates windows
+        # centred on fixed scan points every 0.5 s using its own device
+        # clock, so its window will not line up exactly with "the last two
+        # seconds of what has arrived". The event log below remains the
+        # record of what actually fired.
+        # ------------------------------------------------------------------
+        window_seconds = 2.0
+        newest = samples["sample_epoch"].max()
+        window = samples.loc[samples["sample_epoch"] >= newest - window_seconds]
+
+        rows = []
+        for worker_name, group in window.groupby("worker_name"):
+            group = group.sort_values("sample_epoch")
+
+            # Same trapezoidal integral of gyroscope magnitude over time the
+            # gateway uses for the rotation signal.
+            rotation = 0.0
+            times = group["sample_epoch"].to_numpy()
+            gyros = group["gyroscope_magnitude_dps"].to_numpy()
+            for i in range(1, len(times)):
+                dt = times[i] - times[i - 1]
+                if dt > 0:
+                    rotation += 0.5 * (gyros[i] + gyros[i - 1]) * dt
+
+            measured = {
+                "acceleration_peak_g": group["acceleration_magnitude_g"].max(),
+                "gyroscope_peak_dps": group["gyroscope_magnitude_dps"].max(),
+                "jerk_peak_g_per_second": group["jerk_g_per_second"].max(),
+                "rotation_integral_deg": rotation,
+            }
+
+            entry = {"Worker": worker_name}
+            votes = 0
+            for key, spec in thresholds.items():
+                limit = spec["value"]
+                value = measured.get(key)
+                if value is None or pd.isna(value):
+                    entry[spec["label"]] = "—"
+                    continue
+                over = limit is not None and value >= limit
+                votes += int(over)
+                entry[spec["label"]] = (
+                    ("⚠ " if over else "") + spec["format"].format(value)
+                    + f" {spec['unit']}"
+                )
+            entry["Votes"] = f"{votes}/4"
+            entry["_votes"] = votes
+            rows.append(entry)
+
+        if rows:
+            required = 2
+            if not detector.empty:
+                required = int(
+                    safe_float(detector.iloc[0],
+                               ["required_votes_out_of_4"], 2) or 2
+                )
+
+            triggered = [r for r in rows if r["_votes"] >= required]
+            if triggered:
                 who = ", ".join(
-                    f"{name} ({value:.2f} g)" for name, value in over.items()
+                    f"{r['Worker']} ({r['Votes']})" for r in triggered
                 )
                 st.warning(
-                    f"Above the acceleration threshold in the last 5 s: {who}. "
-                    "A confirmed incident still needs 2 of the 4 signals to "
-                    "agree - check the event log below."
+                    f"Meeting the {required}-of-4 rule right now: {who}. "
+                    "The event log below is the record of what the detector "
+                    "actually stored."
                 )
 
-        latest = (
-            samples.sort_values("sample_epoch")
-                   .groupby("worker_name")
-                   .last()
-                   .reset_index()
-        )
-        cols = st.columns(max(len(latest), 1))
-        for col, (_, row) in zip(cols, latest.iterrows()):
-            col.metric(
-                row["worker_name"],
-                f"{row['acceleration_magnitude_g']:.2f} g",
-                f"{row['gyroscope_magnitude_dps']:.0f} dps",
+            table = pd.DataFrame(rows).drop(columns=["_votes"])
+            st.markdown(
+                f"""
+                <div class="section-card">
+                    <div class="section-title">Signals vs thresholds</div>
+                    <div class="section-help">
+                        Last {window_seconds:.0f} seconds, recomputed the way the
+                        detector does. A warning marker means that signal is
+                        over its threshold; {required} of 4 must agree for an
+                        incident. Indicative only &mdash; the detector uses its
+                        own scan windows, so the event log below is the record.
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
             )
+            st.dataframe(table, width="stretch", hide_index=True)
 
     live_signal_chart()
 

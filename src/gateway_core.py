@@ -66,10 +66,27 @@ def ensure_live_tables(connection):
             sample_epoch REAL NOT NULL,
             elapsed_seconds REAL NOT NULL,
             acceleration_magnitude_g REAL NOT NULL,
-            gyroscope_magnitude_dps REAL NOT NULL
+            gyroscope_magnitude_dps REAL NOT NULL,
+            jerk_g_per_second REAL
         );
         """
     )
+
+    # Migrate a table created before jerk was stored. CREATE TABLE IF NOT
+    # EXISTS silently leaves an older table alone, so without this an
+    # existing database would keep a table missing the column and every
+    # insert would fail.
+    # Index by position, not by name: this must work whether or not the
+    # caller set row_factory, and PRAGMA table_info puts the column name in
+    # field 1.
+    existing = {
+        row[1]
+        for row in connection.execute("PRAGMA table_info(live_samples);")
+    }
+    if "jerk_g_per_second" not in existing:
+        connection.execute(
+            "ALTER TABLE live_samples ADD COLUMN jerk_g_per_second REAL;"
+        )
     connection.execute(
         """
         CREATE INDEX IF NOT EXISTS idx_live_samples_time
@@ -94,8 +111,9 @@ def insert_live_samples(connection, rows):
         """
         INSERT INTO live_samples (
             worker_id, device_id, sample_epoch, elapsed_seconds,
-            acceleration_magnitude_g, gyroscope_magnitude_dps
-        ) VALUES (?, ?, ?, ?, ?, ?);
+            acceleration_magnitude_g, gyroscope_magnitude_dps,
+            jerk_g_per_second
+        ) VALUES (?, ?, ?, ?, ?, ?, ?);
         """,
         rows,
     )

@@ -248,6 +248,7 @@ class LiveStage1Detector:
             elapsed,
             acceleration_magnitude,
             gyroscope_magnitude,
+            jerk,
         )
 
         # Keep enough history for the 2.0 s feature window plus scan margin.
@@ -516,7 +517,7 @@ async def run_connected_session(device, connection, config, worker):
 
             # Buffer this sample for the dashboard's live chart.
             if detector.latest_sample is not None:
-                elapsed, accel_mag, gyro_mag = detector.latest_sample
+                elapsed, accel_mag, gyro_mag, jerk = detector.latest_sample
                 live_buffer.append(
                     (
                         worker["worker_id"],
@@ -525,6 +526,7 @@ async def run_connected_session(device, connection, config, worker):
                         elapsed,
                         accel_mag,
                         gyro_mag,
+                        jerk,
                     )
                 )
 
