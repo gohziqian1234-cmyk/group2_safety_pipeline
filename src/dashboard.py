@@ -1,5 +1,6 @@
 from pathlib import Path
 import sqlite3
+import time
 from datetime import datetime, timezone, timedelta
 
 import pandas as pd
@@ -304,6 +305,46 @@ def connect_db():
 def table_columns(con, table_name):
     rows = con.execute(f"PRAGMA table_info({table_name});").fetchall()
     return {row["name"] for row in rows}
+
+
+LIVE_CHART_SECONDS = 30      # how much history the live chart shows
+
+
+def load_live_samples(seconds=LIVE_CHART_SECONDS):
+    """
+    Read the recent raw signal the gateway buffers for charting.
+
+    Returns an empty frame if the table does not exist yet, which is the
+    normal state before the gateway has run for the first time.
+    """
+    con = connect_db()
+    try:
+        exists = con.execute(
+            "SELECT name FROM sqlite_master "
+            "WHERE type='table' AND name='live_samples';"
+        ).fetchone()
+        if exists is None:
+            return pd.DataFrame()
+
+        cutoff = time.time() - seconds
+        return pd.read_sql_query(
+            """
+            SELECT
+                ls.worker_id,
+                COALESCE(w.worker_name, ls.worker_id) AS worker_name,
+                ls.sample_epoch,
+                ls.acceleration_magnitude_g,
+                ls.gyroscope_magnitude_dps
+            FROM live_samples ls
+            LEFT JOIN workers w ON w.worker_id = ls.worker_id
+            WHERE ls.sample_epoch >= ?
+            ORDER BY ls.sample_epoch;
+            """,
+            con,
+            params=(cutoff,),
+        )
+    finally:
+        con.close()
 
 
 def load_data():
@@ -639,6 +680,76 @@ with overview_tab:
     for col, (_, row) in zip(card_cols, workers.iterrows()):
         with col:
             worker_card(row)
+
+    st.write("")
+
+    # ------------------------------------------------------------------
+    # LIVE SIGNAL CHART
+    #
+    # In its own fragment so it can refresh on a timer without re-running
+    # the whole page - reloading every table once a second would make the
+    # dashboard unusable.
+    # ------------------------------------------------------------------
+    @st.fragment(run_every="1s")
+    def live_signal_chart():
+        st.markdown(
+            """
+            <div class="section-card">
+                <div class="section-title">Live signal</div>
+                <div class="section-help">
+                    Acceleration magnitude in g, one line per connected worker,
+                    last 30 seconds. Updates once a second while the BLE
+                    gateway is running.
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        samples = load_live_samples()
+
+        if samples.empty:
+            st.info(
+                "No live signal yet. Start the BLE gateway "
+                "(py src\\21_live_ble_gateway.py) and the chart will fill in."
+            )
+            return
+
+        # Put both workers on a shared time grid before pivoting.
+        #
+        # Every sample carries its own microsecond timestamp, so pivoting on
+        # the raw value gives one row per sample with the other worker's
+        # column empty - and a line chart skips gaps, so nothing is drawn.
+        # Binning into fixed 200 ms buckets lines the workers up on the same
+        # rows. The bucket takes the maximum rather than the mean, so a short
+        # impact peak survives instead of being averaged away.
+        samples["time"] = pd.to_datetime(
+            (samples["sample_epoch"] // 0.2) * 0.2, unit="s"
+        )
+        accel = samples.pivot_table(
+            index="time",
+            columns="worker_name",
+            values="acceleration_magnitude_g",
+            aggfunc="max",
+        )
+
+        st.line_chart(accel, height=260)
+
+        latest = (
+            samples.sort_values("sample_epoch")
+                   .groupby("worker_name")
+                   .last()
+                   .reset_index()
+        )
+        cols = st.columns(max(len(latest), 1))
+        for col, (_, row) in zip(cols, latest.iterrows()):
+            col.metric(
+                row["worker_name"],
+                f"{row['acceleration_magnitude_g']:.2f} g",
+                f"{row['gyroscope_magnitude_dps']:.0f} dps",
+            )
+
+    live_signal_chart()
 
     st.write("")
 

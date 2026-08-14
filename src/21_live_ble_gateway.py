@@ -10,7 +10,13 @@ from datetime import datetime, timedelta, timezone
 
 from bleak import BleakClient, BleakScanner
 
-from gateway_core import connect_database, process_message
+from gateway_core import (
+    connect_database,
+    ensure_live_tables,
+    insert_live_samples,
+    process_message,
+    trim_live_samples,
+)
 
 
 # ============================================================
@@ -47,6 +53,13 @@ SCAN_STEP_SECONDS = 0.5
 EVENT_WINDOW_BEFORE_SECONDS = 0.8
 EVENT_WINDOW_AFTER_SECONDS = 1.2
 STATUS_INTERVAL_SECONDS = 1.0
+
+# How often buffered samples are written to SQLite for the dashboard chart.
+# One write a second instead of 25 keeps the gateway responsive to Bluetooth.
+LIVE_FLUSH_INTERVAL_SECONDS = 1.0
+
+# How often old chart samples are deleted.
+LIVE_TRIM_INTERVAL_SECONDS = 30.0
 RECONNECT_DELAY_SECONDS = 2.0
 SCAN_TIMEOUT_SECONDS = 12.0
 
@@ -97,6 +110,7 @@ class LiveStage1Detector:
         )
         self.cooldown_until_center = -math.inf
         self.alert_until_monotonic = 0.0
+        self.latest_sample = None
 
     def alert_active(self):
         return time.monotonic() < self.alert_until_monotonic
@@ -226,6 +240,14 @@ class LiveStage1Detector:
                 "gyroscope_magnitude_dps": gyroscope_magnitude,
                 "jerk_g_per_second": jerk,
             }
+        )
+
+        # Kept so the session loop can buffer this sample for the dashboard
+        # chart without recomputing the magnitudes.
+        self.latest_sample = (
+            elapsed,
+            acceleration_magnitude,
+            gyroscope_magnitude,
         )
 
         # Keep enough history for the 2.0 s feature window plus scan margin.
@@ -379,6 +401,18 @@ async def store_event(connection, event_message):
     return result
 
 
+async def flush_live_samples(connection, rows):
+    async with DB_LOCK:
+        insert_live_samples(connection, rows)
+        connection.commit()
+
+
+async def trim_live(connection):
+    async with DB_LOCK:
+        trim_live_samples(connection)
+        connection.commit()
+
+
 async def mark_disconnected(connection, worker):
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
     async with DB_LOCK:
@@ -456,6 +490,9 @@ async def run_connected_session(device, connection, config, worker):
 
         last_status = 0.0
         last_drop_warning = 0.0
+        last_flush = time.monotonic()
+        last_trim = time.monotonic()
+        live_buffer = []
 
         while client.is_connected and not disconnected.is_set():
             try:
@@ -477,6 +514,20 @@ async def run_connected_session(device, connection, config, worker):
                 print(f"[{ble_name}] IGNORED BAD BLE PAYLOAD: {exc}")
                 continue
 
+            # Buffer this sample for the dashboard's live chart.
+            if detector.latest_sample is not None:
+                elapsed, accel_mag, gyro_mag = detector.latest_sample
+                live_buffer.append(
+                    (
+                        worker["worker_id"],
+                        worker["device_id"],
+                        time.time(),
+                        elapsed,
+                        accel_mag,
+                        gyro_mag,
+                    )
+                )
+
             for event_message, votes, features in detections:
                 result = await store_event(connection, event_message)
 
@@ -496,10 +547,24 @@ async def run_connected_session(device, connection, config, worker):
                 print()
 
             now = time.monotonic()
+
+            if now - last_flush >= LIVE_FLUSH_INTERVAL_SECONDS and live_buffer:
+                await flush_live_samples(connection, live_buffer)
+                live_buffer = []
+                last_flush = now
+
+            if now - last_trim >= LIVE_TRIM_INTERVAL_SECONDS:
+                await trim_live(connection)
+                last_trim = now
+
             if now - last_status >= STATUS_INTERVAL_SECONDS:
                 safety_status = "SAFETY_EVENT" if detector.alert_active() else "SAFE"
                 await write_status(connection, worker, safety_status)
                 last_status = now
+
+        # Do not lose the last part-second of chart data on disconnect.
+        if live_buffer:
+            await flush_live_samples(connection, live_buffer)
 
         try:
             await client.stop_notify(COMBINED_IMU_UUID)
@@ -601,6 +666,7 @@ async def main():
     connection = connect_database()
 
     try:
+        ensure_live_tables(connection)
         config = load_and_verify_detector_config(connection)
 
         # Fail before any BLE work if a board is not registered in SQLite -

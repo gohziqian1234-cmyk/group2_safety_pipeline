@@ -34,6 +34,83 @@ def connect_database():
     return connection
 
 
+# ============================================================
+# LIVE SIGNAL BUFFER
+#
+# The detector only stores EVENTS. To draw a live chart the dashboard also
+# needs the raw signal, so the gateway writes a short rolling window of
+# samples here - a few minutes at most, trimmed continuously. This is a
+# display buffer, not a recording: the permanent record is still the events
+# table.
+# ============================================================
+
+# How much history to keep. The dashboard shows less than this; the extra is
+# margin so a slow refresh never finds an empty chart.
+LIVE_SAMPLE_KEEP_SECONDS = 180
+
+
+def ensure_live_tables(connection):
+    """
+    Create the live-sample table if it does not exist.
+
+    Done here rather than only in 17_init_database.py so an existing database
+    gains the table automatically, without anyone having to re-initialise and
+    risk their stored events.
+    """
+    connection.execute(
+        """
+        CREATE TABLE IF NOT EXISTS live_samples (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            worker_id TEXT NOT NULL,
+            device_id TEXT NOT NULL,
+            sample_epoch REAL NOT NULL,
+            elapsed_seconds REAL NOT NULL,
+            acceleration_magnitude_g REAL NOT NULL,
+            gyroscope_magnitude_dps REAL NOT NULL
+        );
+        """
+    )
+    connection.execute(
+        """
+        CREATE INDEX IF NOT EXISTS idx_live_samples_time
+        ON live_samples(sample_epoch);
+        """
+    )
+    connection.commit()
+
+
+def insert_live_samples(connection, rows):
+    """
+    Store a batch of samples.
+
+    Batched on purpose: two boards at 25 Hz is 50 rows a second, and one
+    INSERT plus one commit per sample would spend most of the gateway's time
+    in SQLite rather than reading Bluetooth.
+    """
+    if not rows:
+        return 0
+
+    connection.executemany(
+        """
+        INSERT INTO live_samples (
+            worker_id, device_id, sample_epoch, elapsed_seconds,
+            acceleration_magnitude_g, gyroscope_magnitude_dps
+        ) VALUES (?, ?, ?, ?, ?, ?);
+        """,
+        rows,
+    )
+    return len(rows)
+
+
+def trim_live_samples(connection, keep_seconds=LIVE_SAMPLE_KEEP_SECONDS):
+    """Delete samples older than the retention window."""
+    cutoff = datetime.now(timezone.utc).timestamp() - keep_seconds
+    cursor = connection.execute(
+        "DELETE FROM live_samples WHERE sample_epoch < ?;", (cutoff,)
+    )
+    return cursor.rowcount
+
+
 def parse_message(raw_message):
     if isinstance(raw_message, bytes):
         raw_message = raw_message.decode("utf-8")
