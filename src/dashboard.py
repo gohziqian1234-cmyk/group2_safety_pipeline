@@ -608,6 +608,19 @@ def safe_float(row, possible_names, default=None):
     return default
 
 
+def incident_classification(votes):
+    """Map detector vote strength to the dashboard's incident label."""
+    if votes is None or pd.isna(votes):
+        return "—"
+
+    votes = int(votes)
+    if votes >= 4:
+        return "Fall"
+    if votes >= 2:
+        return "Near-miss"
+    return "Normal"
+
+
 # -----------------------------
 # DATA
 # -----------------------------
@@ -909,7 +922,7 @@ with overview_tab:
                     ("⚠ " if over else "") + spec["format"].format(value)
                     + f" {spec['unit']}"
                 )
-            entry["Votes"] = f"{votes}/4"
+            entry["Incident"] = incident_classification(votes)
             entry["_votes"] = votes
             rows.append(entry)
 
@@ -924,10 +937,10 @@ with overview_tab:
             triggered = [r for r in rows if r["_votes"] >= required]
             if triggered:
                 who = ", ".join(
-                    f"{r['Worker']} ({r['Votes']})" for r in triggered
+                    f"{r['Worker']} ({r['Incident']})" for r in triggered
                 )
                 st.warning(
-                    f"Meeting the {required}-of-4 rule right now: {who}. "
+                    f"Incident-level signal detected right now: {who}. "
                     "The event log below is the record of what the detector "
                     "actually stored."
                 )
@@ -941,8 +954,9 @@ with overview_tab:
                         Last {window_seconds:.0f} seconds, recomputed the way the
                         detector does. A warning marker means that signal is
                         over its threshold; {required} of 4 must agree for an
-                        incident. Indicative only &mdash; the detector uses its
-                        own scan windows, so the event log below is the record.
+                        incident. Dashboard labels use Near-miss for 2-3 votes
+                        and Fall for all 4 votes. Indicative only &mdash; the detector
+                        uses its own scan windows, so the event log below is the record.
                     </div>
                 </div>
                 """,
@@ -980,9 +994,7 @@ with overview_tab:
         recent = visible_events.head(8).copy()
         recent["Time"] = recent["event_time"].map(sg_time)
         recent["Worker"] = recent["worker_name"].fillna(recent["worker_id"])
-        recent["Votes"] = recent["event_votes"].map(
-            lambda x: "—" if pd.isna(x) else f"{int(x)}/4"
-        )
+        recent["Incident"] = recent["event_votes"].map(incident_classification)
 
         st.dataframe(
             recent[
@@ -990,7 +1002,7 @@ with overview_tab:
                     "Time",
                     "Worker",
                     "device_id",
-                    "Votes",
+                    "Incident",
                     "acceleration_peak_g",
                     "gyroscope_peak_dps",
                     "detection_source",
@@ -1043,9 +1055,7 @@ with events_tab:
         log = visible_events.copy()
         log["Time"] = log["event_time"].map(sg_time)
         log["Worker"] = log["worker_name"].fillna(log["worker_id"])
-        log["Votes"] = log["event_votes"].map(
-            lambda x: "—" if pd.isna(x) else f"{int(x)}/4"
-        )
+        log["Event"] = log["event_votes"].map(incident_classification)
         log["Acknowledged"] = log["acknowledged"].map({0: "No", 1: "Yes"})
 
         st.dataframe(
@@ -1054,8 +1064,7 @@ with events_tab:
                     "Time",
                     "Worker",
                     "device_id",
-                    "event_type",
-                    "Votes",
+                    "Event",
                     "acceleration_peak_g",
                     "gyroscope_peak_dps",
                     "jerk_peak_g_per_second",
@@ -1067,7 +1076,6 @@ with events_tab:
             ].rename(
                 columns={
                     "device_id": "Device",
-                    "event_type": "Event",
                     "acceleration_peak_g": "Peak accel (g)",
                     "gyroscope_peak_dps": "Peak gyro (dps)",
                     "jerk_peak_g_per_second": "Peak jerk (g/s)",
@@ -1169,7 +1177,7 @@ with config_tab:
         )
 
         d1, d2, d3 = st.columns(3)
-        d1.metric("Voting rule", f"{required_votes}/4")
+        d1.metric("Trigger rule", f"{required_votes} signals required")
         d2.metric(
             "Reliable incidents detected",
             f"{matched}/{tested}" if tested else str(matched),
@@ -1240,9 +1248,10 @@ with config_tab:
         )
 
         st.caption(
-            "The current validated output is SAFETY_EVENT. "
-            "Fall-vs-near-miss classification was not sufficiently generalised, "
-            "so the dashboard does not claim a reliable fall classification."
+            "Dashboard incident labels are vote-based for the demonstration: "
+            "2-3 threshold votes are shown as Near-miss and all 4 votes are shown "
+            "as Fall. The validated detector itself still stores SAFETY_EVENT and "
+            "the vote-based label is a presentation rule, not a separately validated classifier."
         )
 
 
