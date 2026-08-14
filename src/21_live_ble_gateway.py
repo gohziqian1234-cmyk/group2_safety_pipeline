@@ -42,6 +42,8 @@ from gateway_core import (
 WORKERS = [
     {"ble_name": "ziqian", "worker_id": "ZQ", "device_id": "ZQ_N1"},
     {"ble_name": "hongjean", "worker_id": "HJ", "device_id": "HJ_N1"},
+    {"ble_name": "kwanteng", "worker_id": "KT", "device_id": "KT_N1"},
+    {"ble_name": "pierre", "worker_id": "PI", "device_id": "PI_N1"},
 ]
 
 SERVICE_UUID = "bdc766fc-7eee-417f-bbe0-2e71a8a2bf70"
